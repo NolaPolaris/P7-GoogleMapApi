@@ -24,3 +24,11 @@
     @apply text-base;
 
 }
+
+.star-container{
+    @apply flex;
+}
+
+.star{
+    @apply h-6 w-6 bg-yellow-500 mx-2;
+}

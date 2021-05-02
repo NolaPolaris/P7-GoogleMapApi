@@ -16,11 +16,20 @@ export class Places {
     updateHTML(){
       let listItem = $("<div></div>").addClass("listItem");
       let itemName = $("<h3>" + this.placeName + "</h3>");
-      // let itemRatings = $("span>" + this.ratings.stars + "</span>");
+      let starsNumber = this.ratings[0].stars;
+      let star = $("<span></span>").addClass("star");
+      let starContainer = $("<div></div>").addClass("star-container");
+      let starList ="";
+      for (let i=0; i <= starsNumber; i++){
+        console.log(i);
+      }
+      starContainer.append(starList);
+      console.log(starsNumber);
       let itemAdress = $("<span>" + this.address + "</span>");
       listItem.append(itemName);
       // listItem.append(itemRatings);
       listItem.append(itemAdress);
+      listItem.append(starContainer);
       $("#col-list").append(listItem);
     }
   

@@ -13,6 +13,7 @@ mapApi.loader.loadCallback((e => {
             let place = new Places(val.lat, val.long);
             place.placeName = val.restaurantName;
             place.address = val.address;
+            place.ratings = val.ratings
             // placesList.push(val);
             console.log(place)
             place.add();
