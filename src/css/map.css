@@ -1,0 +1,26 @@
+#map{
+    height: 45rem;
+    width: 75%;
+}
+
+#test {
+    @apply text-blue-500;
+}
+
+.col-left{
+    @apply h-full w-full;
+}
+.listItem{
+    @apply p-4 border-b-2 border-blue-100;
+
+}
+
+.listItem h3{
+    @apply mb-4 text-lg font-bold uppercase;
+
+}
+
+.listItem span{
+    @apply text-base;
+
+}
