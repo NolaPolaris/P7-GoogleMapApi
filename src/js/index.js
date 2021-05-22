@@ -21,11 +21,13 @@ mapApi.loader.loadCallback((e => {
                 let rating = new Rating(element.stars, element.comment);
                 console.log("Ratings Class param");
                 console.log(rating.stars, rating.comment);
-
                 place.ratings.push(rating);
+                console.log("Voici le contenu de place.ratings")
+                console.log(place.ratings)
             });
             placesList.push(place);
             console.log(place)
+            place.getAverage();
             place.add();
             place.updateHTML();
         });

@@ -8,11 +8,6 @@ export class Rating {
     this.comment = comment;
   }
 
-  getAverage() {
-    
-    //recuperer toutes les valeurs associees a la key stars dans l'array ratings
-    //faire la somme puis la division par la lenght du array
-  }
-
+ 
 }
 
