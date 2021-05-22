@@ -39,10 +39,12 @@ export class Places {
       let starsNumber = this.getAverage();
       let starContainer = $("<div></div>").addClass("star-container");
       let starList ="";
-      for (let i=0; i < starsNumber; i++){
-        let star = $("<span></span>").addClass("star");
-        starContainer.append(star)
-      }
+      let star = $("<span></span>").addClass("star").css('width', starsNumber+'rem');
+      starContainer.append(star)
+      // for (let i=0; i < starsNumber; i++){
+      //   let star = $("<span></span>").addClass("star").css('width', starsNumber+'rem');
+      //   starContainer.append(star)
+      // }
       starContainer.append(starList);
       // console.log(starsNumber);
       let itemAdress = $("<span>" + this.address + "</span>");

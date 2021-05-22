@@ -26,9 +26,26 @@
 }
 
 .star-container{
-    @apply flex;
+    @apply flex w-20 h-6 relative;
 }
 
 .star{
-    @apply h-6 w-6 bg-yellow-500 mx-2;
+    @apply absolute top-0 h-6 left-0 bg-yellow-500;
+}
+
+.star:before{
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400%;
+    height: 400%;
+    background-image: radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%), radial-gradient(#ffffff, #ffffff 70%, rgba(0, 0, 0, 0) 71%);
+    background-size: 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em, 0.25em 0.25em;
+    background-position: 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%;
+    background-repeat: no-repeat;
+    transition: all 0s ease-out;
 }
