@@ -4,6 +4,7 @@ let map;
 export const loader = new Loader({
     apiKey: "AIzaSyBE5oclKCY3pLzMgRnCRlwbR1v8cCK6vlg",
     version: "weekly",
+    libraries: ["places"]
 });
 
 loader.load();
@@ -32,6 +33,23 @@ export function addMarker(place) {
         icon: svgMarker,
         map: map,
     });
+}
+
+export function loadPlaces() {
+    var request = {
+        query: 'restaurant',
+        fields: ['name', 'geometry'],
+      };
+    
+      var service = new google.maps.places.PlacesService(map);
+    
+      service.findPlaceFromQuery(request, function(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            console.log(results[i]);
+          }
+        }
+      });
 }
 
 // //   TODO

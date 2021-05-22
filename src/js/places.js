@@ -1,6 +1,6 @@
 import $ from "jquery";
 import { addMarker } from "./api.js";
-
+import { Rating } from './rating.js';
 export class Places {
   constructor(latitude, longitude, placeName) {
       this.placeName = placeName;
