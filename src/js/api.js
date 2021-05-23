@@ -1,5 +1,5 @@
 import { Loader } from "@googlemaps/js-api-loader";
-
+// google.maps.InfoWindow
 let map;
 export const loader = new Loader({
     apiKey: "AIzaSyBE5oclKCY3pLzMgRnCRlwbR1v8cCK6vlg",
@@ -33,6 +33,18 @@ export function addMarker(place) {
         icon: svgMarker,
         map: map,
     });
+
+    function toggleBounce() {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
+    
+    marker.addListener("click", toggleBounce);
+
+    return marker;
 }
 
 export function loadPlaces() {
