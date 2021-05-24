@@ -1,4 +1,6 @@
+import $ from "jquery";
 import { Loader } from "@googlemaps/js-api-loader";
+import { Places } from "./places";
 // google.maps.InfoWindow
 let map;
 export const loader = new Loader({
@@ -42,10 +44,33 @@ export function addMarker(place) {
       }
     }
     
+    const contentString =
+    '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h1 id="firstHeading" class="firstHeading">'+place.placeName+'</h1>' +
+    '<div id="bodyContent">' +
+    "<span>"+ place.getAverage() + "/5</span>"+
+    '<a href="">Voir détails</a>' +
+    "</div>" +
+    "</div>";
+
+  const infowindow = new google.maps.InfoWindow({
+    content: contentString,
+  });
+
+  
+  marker.addListener("click", () => {
+    infowindow.open(map, marker);
+
+  });
+
     marker.addListener("click", toggleBounce);
 
     return marker;
 }
+
+
 
 export function loadPlaces() {
     var request = {

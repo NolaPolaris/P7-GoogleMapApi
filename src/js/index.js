@@ -12,11 +12,8 @@ mapApi.loader.loadCallback((e => {
 
     $.getJSON("places.json", function (data) {
         $.each(data, function (index, val) {
-            console.log(val)
             let place = new Places(val.lat, val.long, val.restaurantName);
             place.address = val.address;
-
-            console.log(val.ratings);
             val.ratings.forEach(element => {
                 let rating = new Rating(element.stars, element.comment);
                 console.log("Ratings Class param");

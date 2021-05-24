@@ -25,46 +25,31 @@ export class Places {
       let average = sum / ratingsStarValue.length;
       console.log(average)
       return average;
-
-      //recuperer toutes les valeurs associees a la key stars dans l'array ratings
-      //faire la somme puis la division par la lenght du array
     }
 
     add() {
       let marker = addMarker(this);
-      let contentPopUp = $("<div>caca</div>");
-      let contentString ='<div id="content">' +
-      '<h1 id="firstHeading" class="firstHeading">' + this.placeName + '</h1>' +
-      '<span class="pop-ratings"></span>'+
-      "</div>";
-      import('./popup.js')
-      .then((module) => {
-        let popup = new module.Popup(
-          new google.maps.LatLng(this.lat, this.lng),
-          contentPopUp[ 0 ]
-        );
-        popup.setMap(map);
-      });
-
-      marker.addListener("click", () => {
-        popup.open(map, marker);
-      });
+      // marker.click(function(){
+      //   marker.addClass("marker");
+      // })
     }
 
     getStreetViewURL(){
-      let url = "https://maps.googleapis.com/maps/api/streetview?size=600x300&location="+this.lat+","+this.lng+"&heading=151.78&pitch=-0.76&key=AIzaSyBE5oclKCY3pLzMgRnCRlwbR1v8cCK6vlg";
+      let url = "https://maps.googleapis.com/maps/api/streetview?size=600x300&location="+this.location.lat+","+this.location.lng+"&heading=151.78&pitch=-0.76&key=AIzaSyBE5oclKCY3pLzMgRnCRlwbR1v8cCK6vlg";
       return url;
     }
 
     updateHTML(){
       let listItem = $("<div></div>").addClass("listItem");
-      let popUp = $("<div></div>").addClass("popUp");
+      //gestion de l'image
       let streetViewContainer = $("<div></div>").addClass("streetViewContainer");
       let url = this.getStreetViewURL();
       let streetView = $("<img/>").attr('src',url);
       streetViewContainer.append(streetView);
+      //gestion des infos principales
       let itemName = $("<h3>" + this.placeName + "</h3>");
       let starsNumber = this.getAverage();
+      //gestion du rating
       let starContainer = $("<div></div>").addClass("star-container");
       let starList ="";
       let star = $("<span></span>").addClass("star").css('width', starsNumber+'rem');
@@ -73,6 +58,16 @@ export class Places {
       //   let star = $("<span></span>").addClass("star").css('width', starsNumber+'rem');
       //   starContainer.append(star)
       // }
+      //gestion des détails
+      let ratingDetails = $("<div></div>").addClass("ratingDetails");
+      let ratingItem = $("<div></div>").addClass("ratingItems");
+      for (let i = 0; i < this.ratings.length; i++){
+        let starsItems = $("<span>"+this.ratings[i].stars+"</span>");
+        let commentItems = $("<span>"+this.ratings[i].comment+"</span>");
+        ratingItem.append(starsItems);
+        ratingItem.append(commentItems);
+      }
+      ratingDetails.append(ratingItem);
       starContainer.append(starList);
       // console.log(starsNumber);
       let itemAdress = $("<span>" + this.address + "</span>");
@@ -80,6 +75,9 @@ export class Places {
       // listItem.append(itemRatings);
       listItem.append(itemAdress);
       listItem.append(starContainer);
+      listItem.append(streetViewContainer);
+      listItem.append(ratingDetails);
+
       $(".pop-ratings").append(starContainer);
       $("#col-list").append(listItem);
       $("#content").append(starContainer);
