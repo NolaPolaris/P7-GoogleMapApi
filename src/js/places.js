@@ -39,25 +39,43 @@ export class Places {
       return url;
     }
 
+    slugify(str){
+        str = str.replace(/^\s+|\s+$/g, ''); // trim
+        str = str.toLowerCase();
+        // remove accents, swap ñ for n, etc
+        var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+        var to   = "aaaaeeeeiiiioooouuuunc------";
+        for (var i=0, l=from.length ; i<l ; i++) {
+            str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+        }
+    
+        str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+            .replace(/\s+/g, '-') // collapse whitespace and replace by -
+            .replace(/-+/g, '-'); // collapse dashes
+    
+        return str;
+    }
+
     updateHTML(){
       let listItem = $("<div></div>").addClass("listItem");
+      let itemId = this.slugify(this.placeName);
+      listItem.attr('id', itemId);
       //gestion de l'image
       let streetViewContainer = $("<div></div>").addClass("streetViewContainer");
       let url = this.getStreetViewURL();
       let streetView = $("<img/>").attr('src',url);
       streetViewContainer.append(streetView);
+      
       //gestion des infos principales
       let itemName = $("<h3>" + this.placeName + "</h3>");
       let starsNumber = this.getAverage();
+
       //gestion du rating
       let starContainer = $("<div></div>").addClass("star-container");
       let starList ="";
       let star = $("<span></span>").addClass("star").css('width', starsNumber+'rem');
       starContainer.append(star)
-      // for (let i=0; i < starsNumber; i++){
-      //   let star = $("<span></span>").addClass("star").css('width', starsNumber+'rem');
-      //   starContainer.append(star)
-      // }
+
       //gestion des détails
       let ratingDetails = $("<div></div>").addClass("ratingDetails");
       let ratingItem = $("<div></div>").addClass("ratingItems");
@@ -69,10 +87,8 @@ export class Places {
       }
       ratingDetails.append(ratingItem);
       starContainer.append(starList);
-      // console.log(starsNumber);
       let itemAdress = $("<span>" + this.address + "</span>");
       listItem.append(itemName);
-      // listItem.append(itemRatings);
       listItem.append(itemAdress);
       listItem.append(starContainer);
       listItem.append(streetViewContainer);

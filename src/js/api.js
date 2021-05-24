@@ -43,17 +43,17 @@ export function addMarker(place) {
         marker.setAnimation(google.maps.Animation.BOUNCE);
       }
     }
-    
+    // let placeId = place.slugify(place.placeName);
     const contentString =
     '<div id="content">' +
     '<div id="siteNotice">' +
     "</div>" +
     '<h1 id="firstHeading" class="firstHeading">'+place.placeName+'</h1>' +
     '<div id="bodyContent">' +
-    "<span>"+ place.getAverage() + "/5</span>"+
-    '<a href="">Voir détails</a>' +
-    "</div>" +
-    "</div>";
+    "<span>"+ place.getAverage() + "/5</span>"+"<br/>"
+    // +'<a href=#'+placeId+">"
+    + "</div>"
+    + "</div>";
 
   const infowindow = new google.maps.InfoWindow({
     content: contentString,
