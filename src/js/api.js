@@ -56,18 +56,20 @@ export function addMarker(place) {
     + "</div>";
 
   const infowindow = new google.maps.InfoWindow({
-    content: contentString,
+    content: contentString
   });
 
   
-  marker.addListener("click", () => {
+  marker.addListener("mouseover", () => {
     infowindow.open(map, marker);
-
+  });
+  
+  marker.addListener("click", () => {
+    place.showDetails();
   });
 
-    marker.addListener("click", toggleBounce);
-
-    return marker;
+  marker.addListener("click", toggleBounce);
+  return marker;
 }
 
 

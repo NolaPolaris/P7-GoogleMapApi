@@ -35,8 +35,4 @@ mapApi.loader.loadCallback((e => {
 
 $(document).ready(function () {
     
-    // for (let i = 0; i <= placesList.length; i++) {
-    //     console.log(placesList[i]);
-    // }
-
 });

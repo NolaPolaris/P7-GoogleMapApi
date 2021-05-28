@@ -8,11 +8,11 @@ export class Places {
       this.address = null;
       this.ratings = new Array();
       this.location = { lat: latitude, lng: longitude };
+      this.slug = this.slugify(this.placeName);
       // ajouter une image liée via Street View Static
     };
 
     getAverage() {
-      console.log("getAverage is call");
       const reducer = (accumulator, currentValue) => accumulator + currentValue;
       let ratingsStarValue = new Array();
       
@@ -76,7 +76,18 @@ export class Places {
       let star = $("<span></span>").addClass("star").css('width', starsNumber+'rem');
       starContainer.append(star)
 
+      starContainer.append(starList);
+      let itemAdress = $("<span>" + this.address + "</span>");
+      listItem.append(itemName);
+      listItem.append(itemAdress);
+      listItem.append(starContainer);
+      listItem.append(streetViewContainer);
+
+      $(".pop-ratings").append(starContainer);
+      $("#col-list").append(listItem);
+      $("#content").append(starContainer);
       //gestion des détails
+     
       let ratingDetails = $("<div></div>").addClass("ratingDetails");
       let ratingItem = $("<div></div>").addClass("ratingItems");
       for (let i = 0; i < this.ratings.length; i++){
@@ -86,17 +97,14 @@ export class Places {
         ratingItem.append(commentItems);
       }
       ratingDetails.append(ratingItem);
-      starContainer.append(starList);
-      let itemAdress = $("<span>" + this.address + "</span>");
-      listItem.append(itemName);
-      listItem.append(itemAdress);
-      listItem.append(starContainer);
-      listItem.append(streetViewContainer);
-      listItem.append(ratingDetails);
+      listItem.append(ratingDetails);  
+    }
 
-      $(".pop-ratings").append(starContainer);
-      $("#col-list").append(listItem);
-      $("#content").append(starContainer);
+    showDetails(){
+      console.log(this.slug);
+      let id = '#'+ this.slug;
+      let details = $('.ratingDetails');
+      $(id).find(details).slideDown(100);
     }
   
 }
