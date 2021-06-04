@@ -103,14 +103,10 @@ export function loadPlaces() {
         let placeName = results[i].name;
         let rating = results[i].rating;
         console.log(rating);
-        // let placeId = results[i].place_id;
-        // results[i].ratings.forEach(element => {
-        //   let rating = new Rating(element.stars, element.comment);
-        //   place.ratings.push(rating);
-        // });
         let place = new Places(lat, lng, placeName);
         place.ratings.push(rating);
         console.log(place.ratings);
+        place.getAverage()
         place.add();
         place.updateHTML();
 
