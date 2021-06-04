@@ -50,6 +50,23 @@
     transition: all 0s ease-out;
 }
 
+.itemInfo{
+    @apply flex flex-col;
+}
+
+.streetViewContainer{
+    @apply h-24 w-24;
+}
+
+
+.streetViewContainer img{
+    @apply object-cover w-full h-full rounded-full;
+}
+
+.flexContainer{
+    @apply flex justify-between;
+}
+
 .marker{
     @apply relative;
 }
@@ -58,10 +75,32 @@
     @apply h-20 w-20;
 }
 
-.popUp{
-    @apply absolute top-0 h-20 w-20 hidden;
-}
 
 .ratingDetails{
     @apply hidden;
+}
+
+.ratingItems{
+    @apply my-4 relative;
+}
+
+.ratingItems p:first-child {
+    @apply mt-4 text-sm text-yellow-500 mb-2 font-bold pr-4 ;
+    width:10%;
+}
+
+.ratingItems:after {
+    @apply absolute;
+    top: 0.75rem;
+    right: 1rem;
+    transform: translateY(-50%);
+    content: "";
+    height: 1px;
+    width: 90%;
+    background: teal;
+    
+}
+
+.ratingItems p:nth-child(2){
+    @apply text-sm;
 }

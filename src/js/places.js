@@ -1,7 +1,7 @@
 import $ from "jquery";
 import { addMarker } from "./api.js";
 import { Rating } from './rating.js';
-// import { Popup } from './popup.js';
+
 export class Places {
   constructor(latitude, longitude, placeName) {
       this.placeName = placeName;
@@ -12,19 +12,24 @@ export class Places {
       // ajouter une image liée via Street View Static
     };
 
-    getAverage() {
+    getAverage() { 
       const reducer = (accumulator, currentValue) => accumulator + currentValue;
       let ratingsStarValue = new Array();
-      
-      for (let i = 0; i < this.ratings.length; i++){
-        console.log(this.ratings[i].stars)
-        let starValue = this.ratings[i].stars;
-        ratingsStarValue.push(starValue);       
+      if (this.ratings.length > 0){
+        for (let i = 0; i < this.ratings.length; i++){
+          console.log(this.ratings[i].stars)
+          let starValue = this.ratings[i].stars;
+          ratingsStarValue.push(starValue);       
+        }
+        let sum = ratingsStarValue.reduce(reducer);
+        let average = sum / ratingsStarValue.length;
+        console.log(average)
+        return average;
       }
-      let sum = ratingsStarValue.reduce(reducer);
-      let average = sum / ratingsStarValue.length;
-      console.log(average)
-      return average;
+      else{
+        return;
+      }
+     
     }
 
     add() {
@@ -58,6 +63,8 @@ export class Places {
 
     updateHTML(){
       let listItem = $("<div></div>").addClass("listItem");
+      let flexContainer = $("<div></div>").addClass("flexContainer");
+
       let itemId = this.slugify(this.placeName);
       listItem.attr('id', itemId);
       //gestion de l'image
@@ -78,25 +85,31 @@ export class Places {
 
       starContainer.append(starList);
       let itemAdress = $("<span>" + this.address + "</span>");
-      listItem.append(itemName);
-      listItem.append(itemAdress);
-      listItem.append(starContainer);
-      listItem.append(streetViewContainer);
+      let itemInfo = $('<div></div>').addClass('itemInfo');
+      itemInfo.append(itemName);
+      itemInfo.append(itemAdress);
+      itemInfo.append(starContainer);
+
+      flexContainer.append(itemInfo, streetViewContainer);
+      listItem.append(flexContainer);
 
       $(".pop-ratings").append(starContainer);
       $("#col-list").append(listItem);
       $("#content").append(starContainer);
+      
       //gestion des détails
      
       let ratingDetails = $("<div></div>").addClass("ratingDetails");
-      let ratingItem = $("<div></div>").addClass("ratingItems");
+      
       for (let i = 0; i < this.ratings.length; i++){
-        let starsItems = $("<span>"+this.ratings[i].stars+"</span>");
-        let commentItems = $("<span>"+this.ratings[i].comment+"</span>");
+        let starsItems = $("<p>"+this.ratings[i].stars+"/5"+"</p>");
+        let commentItems = $("<p>"+this.ratings[i].comment+"</p>");
+        let ratingItem = $("<div></div>").addClass("ratingItems");
         ratingItem.append(starsItems);
         ratingItem.append(commentItems);
+        ratingDetails.append(ratingItem);
       }
-      ratingDetails.append(ratingItem);
+     
       listItem.append(ratingDetails);  
     }
 

@@ -1,6 +1,8 @@
 import '../css/style.css';
 import * as mapApi from './api.js';
-import {Places} from './places.js';
+import './api.js';
+
+import { Places } from './places.js';
 import $ from "jquery";
 import { Rating } from './rating';
 
@@ -16,11 +18,7 @@ mapApi.loader.loadCallback((e => {
             place.address = val.address;
             val.ratings.forEach(element => {
                 let rating = new Rating(element.stars, element.comment);
-                console.log("Ratings Class param");
-                console.log(rating.stars, rating.comment);
                 place.ratings.push(rating);
-                console.log("Voici le contenu de place.ratings")
-                console.log(place.ratings)
             });
             placesList.push(place);
             console.log(place)
@@ -31,8 +29,13 @@ mapApi.loader.loadCallback((e => {
     });
 
     mapApi.loadPlaces();
+    
+
 }));
+
+
 
 $(document).ready(function () {
     
+
 });
