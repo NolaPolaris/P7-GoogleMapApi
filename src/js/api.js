@@ -88,27 +88,41 @@ export function loadPlaces() {
   // var centre = new google.maps.LatLng(48.866667,2.333333);
   var request = {
     query: 'restaurants',
-    fields: ['name', 'geometry.location.lat', 'geometry.location.lng', 'place_id', 'rating'],
+    fields: ['place_id'],
   };
 
   var service = new google.maps.places.PlacesService(map);
 
   service.textSearch(request, function (results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-      console.log(results);
-
       for (var i = 0; i < results.length; i++) {
-        let lat = results[i].geometry.location.lat();
-        let lng = results[i].geometry.location.lng();
-        let placeName = results[i].name;
-        let rating = results[i].rating;
-        console.log(rating);
-        let place = new Places(lat, lng, placeName);
-        place.ratings.push(rating);
-        console.log(place.ratings);
-        place.getAverage()
-        place.add();
-        place.updateHTML();
+        var request = {
+          placeId: results[i].place_id,
+          fields: ['name', 'geometry.location.lat', 'geometry.location.lng', 'reviews']
+        };
+
+        service.getDetails(request, callback);
+        function callback(results, status) {
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+            console.log("getDetails success");
+            let lat = results.geometry.location.lat();
+            let lng = results.geometry.location.lng();
+            let name = results.name;
+            let place = new Places(lat, lng, name);
+            for (var i = 0; i < results.reviews.length; i++){
+              console.log(results.reviews[i].text);
+              let review = new Rating(results.reviews[i].rating, results.reviews[i].text);
+              review.stars = results.reviews[i].rating;
+              review.comment = results.reviews[i].text;
+              place.ratings.push(review);
+            }
+            place.getAverage();
+            place.add();
+            place.updateHTML();
+           
+          }
+        }
+
 
 
         // var request = {
@@ -136,21 +150,7 @@ export function loadPlaces() {
     }
   });
 
-  // var request = {
-  //   placeId: results[i].place_id,
-  //   fields: ['name', 'rating', 'geometry.location.lat','geometry.location.lng']
-  // };
 
-  // service.getDetails(request, callback);
-  // function callback(place, status) {
-  //   if (status == google.maps.places.PlacesServiceStatus.OK) {
-  //     console.log("getDetails success")
-  //     let lat = place.geometry.location.lat();
-  //     let lng = place.geometry.location.lng();
-  //     console.log(lat);
-
-  //   }
-  // }
 
   // var request = {
   //   placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4',
