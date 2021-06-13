@@ -14,21 +14,23 @@ loader.load();
 
 export function loadMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 48.866667, lng: 2.333333 },
+    center: { lat: 48.582267066445866, lng: 7.743552772565216 },  
     zoom: 12,
+  });
+
+  map.addListener("rightclick", (mapsMouseEvent) => {
+    let contextMenu = $("#addForm");
+    let position = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2);
+    console.log(position);
+    contextMenu.toggleClass("active");
+    // afficher lat lng
+    // afficher formulaire pour ajouter une nouvelle place (pas de vérification, on créée juste une place par rapport aux données données dans le formulaire)
+    // améliorer via Geocoding : à l'aide des lat lng, on cherche l'adresse correspondante. On ajoute ensuite la Place en elle-même. 
+
   });
 }
 
-// export function initMap() {
-//   map = new google.maps.Map(document.getElementById("map"), {
-//       center: { lat: 48.866667, lng: 2.333333 },
-//       zoom: 12,
-//   });
 
-//   map.addListener('load', (event) => {
-//     console.log('map is fully loaded');
-// });
-// }
 
 export function addMarker(place) {
   const svgMarker = {
@@ -48,13 +50,9 @@ export function addMarker(place) {
     map: map,
   });
 
-  function toggleBounce() {
-    if (marker.getAnimation() !== null) {
-      marker.setAnimation(null);
-    } else {
-      marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
-  }
+
+
+  
   // let placeId = place.slugify(place.placeName);
   const contentString =
     '<div id="content">' +
@@ -80,8 +78,8 @@ export function addMarker(place) {
     place.showDetails();
   });
 
-  marker.addListener("click", toggleBounce);
-  return marker;
+  // marker.addListener("click", toggleBounce);
+  // return marker;
 }
 
 export function loadPlaces() {
@@ -91,7 +89,7 @@ export function loadPlaces() {
     fields: ['place_id'],
   };
 
-  var service = new google.maps.places.PlacesService(map);
+var service = new google.maps.places.PlacesService(map);
 
   service.textSearch(request, function (results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -104,13 +102,12 @@ export function loadPlaces() {
         service.getDetails(request, callback);
         function callback(results, status) {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
-            console.log("getDetails success");
             let lat = results.geometry.location.lat();
             let lng = results.geometry.location.lng();
             let name = results.name;
             let place = new Places(lat, lng, name);
             for (var i = 0; i < results.reviews.length; i++){
-              console.log(results.reviews[i].text);
+              // console.log(results.reviews[i].text);
               let review = new Rating(results.reviews[i].rating, results.reviews[i].text);
               review.stars = results.reviews[i].rating;
               review.comment = results.reviews[i].text;
@@ -148,22 +145,7 @@ export function loadPlaces() {
 
       }
     }
-  });
+});
 
-
-
-  // var request = {
-  //   placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4',
-  //   fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
-  // };
-
-  // service = new google.maps.places.PlacesService(map);
-  // service.getDetails(request, callback);
-
-  // function callback(place, status) {
-  //   if (status == google.maps.places.PlacesServiceStatus.OK) {
-  //     addMarker(place);
-  //   }
-  // }
 }
 

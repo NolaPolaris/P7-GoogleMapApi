@@ -21,7 +21,7 @@ mapApi.loader.loadCallback((e => {
                 place.ratings.push(rating);
             });
             placesList.push(place);
-            console.log(place)
+            // console.log(place)
             place.getAverage();
             place.add();
             place.updateHTML();
@@ -29,8 +29,13 @@ mapApi.loader.loadCallback((e => {
     });
 
     mapApi.loadPlaces();
-    
 
+    // $('#map').contextmenu(function(){
+    //     // let point = new google.map.Point(lat, lng)
+    //     let pointPosition = new google.maps.LatLng();
+    //     // console.log(point)
+    //     console.log(lat);
+    // });
 }));
 
 

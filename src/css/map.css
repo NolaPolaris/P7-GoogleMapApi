@@ -104,3 +104,14 @@
 .ratingItems p:nth-child(2){
     @apply text-sm;
 }
+
+#addForm{
+    @apply hidden;
+}
+
+#addForm.active{
+    @apply absolute block;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%)
+}

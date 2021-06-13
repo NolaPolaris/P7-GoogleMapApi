@@ -17,13 +17,13 @@ export class Places {
       let ratingsStarValue = new Array();
       if (this.ratings.length > 0){
         for (let i = 0; i < this.ratings.length; i++){
-          console.log(this.ratings[i].stars)
+          // console.log(this.ratings[i].stars)
           let starValue = this.ratings[i].stars;
           ratingsStarValue.push(starValue);       
         }
         let sum = ratingsStarValue.reduce(reducer);
         let average = sum / ratingsStarValue.length;
-        console.log(average)
+        // console.log(average)
         return average;
       }
       else{
