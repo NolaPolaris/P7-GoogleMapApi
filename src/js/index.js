@@ -12,30 +12,25 @@ let placesList = new Array;
 mapApi.loader.loadCallback((e => {
     mapApi.loadMap();
 
-    $.getJSON("places.json", function (data) {
-        $.each(data, function (index, val) {
-            let place = new Places(val.lat, val.long, val.restaurantName);
-            place.address = val.address;
-            val.ratings.forEach(element => {
-                let rating = new Rating(element.stars, element.comment);
-                place.ratings.push(rating);
-            });
-            placesList.push(place);
-            // console.log(place)
-            place.getAverage();
-            place.add();
-            place.updateHTML();
-        });
-    });
+    // EXERCICE AVEC JSON DIST
+
+    // $.getJSON("places.json", function (data) {
+    //     $.each(data, function (index, val) {
+    //         let place = new Places(val.lat, val.long, val.restaurantName);
+    //         place.address = val.address;
+    //         val.ratings.forEach(element => {
+    //             let rating = new Rating(element.stars, element.comment);
+    //             place.ratings.push(rating);
+    //         });
+    //         placesList.push(place);
+    //         // console.log(place)
+    //         place.getAverage();
+    //         place.add();
+    //         place.updateHTML();
+    //     });
+    // });
 
     mapApi.loadPlaces();
-
-    // $('#map').contextmenu(function(){
-    //     // let point = new google.map.Point(lat, lng)
-    //     let pointPosition = new google.maps.LatLng();
-    //     // console.log(point)
-    //     console.log(lat);
-    // });
 }));
 
 

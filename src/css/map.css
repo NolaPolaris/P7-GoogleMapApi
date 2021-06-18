@@ -1,10 +1,15 @@
 #map{
-    height: 45rem;
+    height: 100vh;
     width: 75%;
 }
 
 #test {
     @apply text-blue-500;
+}
+
+#col-list{
+    height: 100vh;
+    overflow: scroll;
 }
 
 .col-left{
@@ -114,4 +119,8 @@
     top:50%;
     left:50%;
     transform:translate(-50%, -50%)
+}
+
+#addForm{
+    @apply py-8 px-8 bg-white;
 }

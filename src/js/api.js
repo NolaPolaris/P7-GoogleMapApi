@@ -18,17 +18,47 @@ export function loadMap() {
     zoom: 12,
   });
 
-  map.addListener("rightclick", (mapsMouseEvent) => {
+  map.addListener("click", (mapsMouseEvent) => {
     let contextMenu = $("#addForm");
-    let position = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2);
-    console.log(position);
+   
+    let position = mapsMouseEvent.latLng.toJSON();
+    let lat = position["lat"];
+    let lng = position['lng'];
+    $("#lat").attr("value", lat);
+    $("#lng").attr("value", lng);
+
+  
+    function addPlace(){
+      console.log("function addPlace");
+      let placeName = $('#name').val();
+      let placeAdress = $('#adress').val();
+      let place = new Places(lat, lng, placeName);
+      place.adress = placeAdress;
+      place.getAverage();
+      place.add();
+      place.updateHTML();
+    }
+  
     contextMenu.toggleClass("active");
+    $( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      addPlace();
+
+    });
+
     // afficher lat lng
     // afficher formulaire pour ajouter une nouvelle place (pas de vérification, on créée juste une place par rapport aux données données dans le formulaire)
     // améliorer via Geocoding : à l'aide des lat lng, on cherche l'adresse correspondante. On ajoute ensuite la Place en elle-même. 
+    // contextMenu.submit(function( e ){
+    //   e.preventDefault();
+    //   addPlace();
+    // });
+    
 
   });
+
 }
+
 
 
 
@@ -49,8 +79,11 @@ export function addMarker(place) {
     icon: svgMarker,
     map: map,
   });
+// FORM
 
+// export function addPlace(){
 
+// }
 
   
   // let placeId = place.slugify(place.placeName);
