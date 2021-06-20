@@ -31,6 +31,7 @@ mapApi.loader.loadCallback((e => {
     // });
 
     mapApi.loadPlaces();
+    
 }));
 
 

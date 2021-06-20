@@ -9,7 +9,6 @@ export class Places {
       this.ratings = new Array();
       this.location = { lat: latitude, lng: longitude };
       this.slug = this.slugify(this.placeName);
-      // ajouter une image liée via Street View Static
     };
 
     getAverage() { 
@@ -114,10 +113,13 @@ export class Places {
     }
 
     showDetails(){
-      console.log(this.slug);
       let id = '#'+ this.slug;
       let details = $('.ratingDetails');
+      
       $(id).find(details).slideDown(100);
+      $([document.documentElement, document.body]).animate({
+        scrollTop: $(id).offset().top
+      }, 2000);
     }
   
 }

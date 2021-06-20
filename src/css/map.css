@@ -124,3 +124,15 @@
 #addForm{
     @apply py-8 px-8 bg-white;
 }
+
+input[type='text'], input[type='number'], textarea{
+    @apply border-solid border ;
+}
+
+input[type='text']:focus, input[type='number']:focus, textarea{
+    @apply bg-blue-100;
+}
+
+.fieldset{
+    @apply flex mb-4;
+}

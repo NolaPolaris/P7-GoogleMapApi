@@ -46,21 +46,9 @@ export function loadMap() {
 
     });
 
-    // afficher lat lng
-    // afficher formulaire pour ajouter une nouvelle place (pas de vérification, on créée juste une place par rapport aux données données dans le formulaire)
-    // améliorer via Geocoding : à l'aide des lat lng, on cherche l'adresse correspondante. On ajoute ensuite la Place en elle-même. 
-    // contextMenu.submit(function( e ){
-    //   e.preventDefault();
-    //   addPlace();
-    // });
-    
-
   });
 
 }
-
-
-
 
 export function addMarker(place) {
   const svgMarker = {
@@ -79,14 +67,7 @@ export function addMarker(place) {
     icon: svgMarker,
     map: map,
   });
-// FORM
 
-// export function addPlace(){
-
-// }
-
-  
-  // let placeId = place.slugify(place.placeName);
   const contentString =
     '<div id="content">' +
     '<div id="siteNotice">' +
@@ -94,7 +75,7 @@ export function addMarker(place) {
     '<h1 id="firstHeading" class="firstHeading">' + place.placeName + '</h1>' +
     '<div id="bodyContent">' +
     "<span>" + place.getAverage() + "/5</span>" + "<br/>"
-    // +'<a href=#'+placeId+">"
+    +"<span class='seeMore'>"+'Voir plus'+"</span>"
     + "</div>"
     + "</div>";
 
@@ -102,17 +83,16 @@ export function addMarker(place) {
     content: contentString
   });
 
-
-  marker.addListener("mouseover", () => {
+  marker.addListener("click", () => {
     infowindow.open(map, marker);
   });
 
   marker.addListener("click", () => {
-    place.showDetails();
+    place.showDetails(); 
   });
 
-  // marker.addListener("click", toggleBounce);
-  // return marker;
+
+  
 }
 
 export function loadPlaces() {
@@ -153,27 +133,6 @@ var service = new google.maps.places.PlacesService(map);
           }
         }
 
-
-
-        // var request = {
-        //   placeId: placeId,
-        //   fields: ['name', 'rating']
-        // };
-
-        // service = new google.maps.places.PlacesService(map);
-        // service.getDetails(request, callback);
-
-        // function callback(place, status) {
-        //   if (status == google.maps.places.PlacesServiceStatus.OK) {
-        //     console.log("details");
-        //     console.log(request.fields);
-        //     let place = new Places(lat, lng, placeName);
-        //     console.log(place);
-        //     place.getAverage();
-        //     place.add();
-        //     place.updateHTML();
-        //   }
-        // }
 
 
       }
