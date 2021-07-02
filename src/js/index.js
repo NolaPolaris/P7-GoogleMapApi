@@ -7,7 +7,7 @@ import $ from "jquery";
 import { Rating } from './rating';
 
 // le JSON est loadé, mais il faut pouvoir stocker la liste des restaurant dans une list en mémoire. On crée donc une liste de places qu'on garde toujours en mémoire dans notre projet : 
-let placesList = new Array;
+let placesList = [];
 
 mapApi.loader.loadCallback((e => {
     mapApi.loadMap();
@@ -32,11 +32,14 @@ mapApi.loader.loadCallback((e => {
 
     mapApi.loadPlaces();
     
+   
+   
+    
 }));
 
 
 
 $(document).ready(function () {
     
-
+    
 });

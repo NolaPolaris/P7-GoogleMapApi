@@ -18,9 +18,8 @@ export function loadMap() {
     zoom: 12,
   });
 
-  map.addListener("click", (mapsMouseEvent) => {
-    let contextMenu = $("#addForm");
-   
+  map.addListener("rightclick", (mapsMouseEvent) => {
+    let contextMenu = $("#addForm"); 
     let position = mapsMouseEvent.latLng.toJSON();
     let lat = position["lat"];
     let lng = position['lng'];
@@ -29,7 +28,6 @@ export function loadMap() {
 
   
     function addPlace(){
-      console.log("function addPlace");
       let placeName = $('#name').val();
       let placeAdress = $('#adress').val();
       let place = new Places(lat, lng, placeName);
@@ -39,15 +37,25 @@ export function loadMap() {
       place.updateHTML();
     }
   
-    contextMenu.toggleClass("active");
-    $( "form" ).on( "submit", function( event ) {
+    contextMenu.addClass("active");
+    let overlay =  $('<div></div>').addClass('overlay');
+    let thx = $('<p>' + 'Votre restaurant a bien été ajouté !' +'</p>');
+    let close = $('<div>'+'Fermer'+'</div>').addClass('btn'+' '+'close');
+    $( "form" ).append(overlay);
+    $( "form" ).on( "submit", function(event) {
       event.preventDefault();
       addPlace();
-
+      overlay.addClass('pop').append(thx, close);
+      $( ".close" ).on( "click", function(){
+        overlay.removeClass('pop');
+        $( "form").removeClass('active');
+      });
     });
+    
 
   });
 
+  
 }
 
 export function addMarker(place) {
@@ -75,7 +83,6 @@ export function addMarker(place) {
     '<h1 id="firstHeading" class="firstHeading">' + place.placeName + '</h1>' +
     '<div id="bodyContent">' +
     "<span>" + place.getAverage() + "/5</span>" + "<br/>"
-    +"<span class='seeMore'>"+'Voir plus'+"</span>"
     + "</div>"
     + "</div>";
 
@@ -83,8 +90,12 @@ export function addMarker(place) {
     content: contentString
   });
 
-  marker.addListener("click", () => {
+  marker.addListener("mouseover", () => {
     infowindow.open(map, marker);
+  });
+
+  marker.addListener("mouseout", () => {
+    infowindow.close(map, marker);
   });
 
   marker.addListener("click", () => {
@@ -97,19 +108,19 @@ export function addMarker(place) {
 
 export function loadPlaces() {
   // var centre = new google.maps.LatLng(48.866667,2.333333);
-  var request = {
+  let request = {
     query: 'restaurants',
     fields: ['place_id'],
   };
 
-var service = new google.maps.places.PlacesService(map);
+let service = new google.maps.places.PlacesService(map);
 
   service.textSearch(request, function (results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < results.length; i++) {
         var request = {
           placeId: results[i].place_id,
-          fields: ['name', 'geometry.location.lat', 'geometry.location.lng', 'reviews']
+          fields: ['name', 'geometry.location.lat', 'geometry.location.lng', 'reviews', 'formatted_address']
         };
 
         service.getDetails(request, callback);
@@ -118,7 +129,10 @@ var service = new google.maps.places.PlacesService(map);
             let lat = results.geometry.location.lat();
             let lng = results.geometry.location.lng();
             let name = results.name;
+            let adress = results.formatted_address;
+            console.log(adress)
             let place = new Places(lat, lng, name);
+            place.address = adress;
             for (var i = 0; i < results.reviews.length; i++){
               // console.log(results.reviews[i].text);
               let review = new Rating(results.reviews[i].rating, results.reviews[i].text);
@@ -138,6 +152,7 @@ var service = new google.maps.places.PlacesService(map);
       }
     }
 });
+
 
 }
 
