@@ -9,7 +9,9 @@
 
 #col-list{
     height: 100vh;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
 }
 
 .col-left{
@@ -25,16 +27,17 @@
 }
 
 .listItem.selected .close{
-    @apply flex absolute right-4 left-4 h-8 w-8;
+    @apply flex absolute right-0 top-0 h-8 w-8 cursor-pointer;
 }
 
 .listItem.selected .close:after{
     @apply absolute h-8 w-8;
     content: '';
     left: 50%;
+    transform: translate(-50%, -50%);
     top: 50%;
-    /* background: url('/src/img/cancel.svg') no-repeat center;
-    background-size: cover; */
+    background: url('https://pics.freeicons.io/uploads/icons/png/3394877631553239370-512.png') no-repeat center;
+    background-size: cover;
 }
 
 .listItem h3{
@@ -97,6 +100,10 @@
     @apply hidden;
 }
 
+.ratingDetails.active{
+    background: white;
+    height: 100%;
+}
 .ratingItems{
     @apply my-4 relative;
 }
@@ -194,5 +201,39 @@ input[type='text']:focus, input[type='number']:focus, textarea{
 }
 
 .formReview.active{
-    @apply block;
+    @apply flex flex-col;
+  
 }
+
+.formReview.active textarea{
+    @apply my-8;
+    appearance: none;
+    border: 1px rgb(255, 160, 160) solid;
+    padding: 5px;
+    max-width: 100%;
+    max-height: 360px;
+    min-height: 300px;
+
+    outline: none;
+    background: none;
+}
+
+.formReview.active input{
+    appearance: none;
+    border: 2px hotpink solid;
+    padding: 10px 5px;
+    background: transparent;
+    color: hotpink;
+    width: 50%;
+    margin: auto;
+    outline: none;
+}
+
+.formReview.active input:hover{
+    appearance: none;
+    border: 2px hotpink solid;
+    padding: 10px 5px;
+    background: hotpink;
+    color: white;
+}
+

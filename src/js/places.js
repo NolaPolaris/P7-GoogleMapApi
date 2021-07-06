@@ -3,7 +3,10 @@ import { addMarker } from "./api.js";
 import { Rating } from './rating.js';
 
 export class Places {
+  // fetch dans le constructeur (attention au function, privilégier )
   constructor(latitude, longitude, placeName) {
+      //fetch url 
+      // . then => après avoir récupérer les data, puis transformer en JSON, on construit à partir de ces données :
       this.placeName = placeName;
       this.address = null;
       this.ratings = [];
@@ -153,8 +156,12 @@ export class Places {
       else{
         $(id).addClass('selected');
       }
-
       $('#col_list').append('.selected');
+      $('.close').on('click', function(){
+        if ($('.listItem').hasClass('selected')){
+          $('.listItem').removeClass('selected');
+        }
+      });
     }
   
   

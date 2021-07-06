@@ -4,6 +4,16 @@ import { Places } from "./places.js";
 import { Rating } from './rating';
 let map;
 
+//creer function pour fetch
+// fetch("url avec param et clé")
+// .then(data=>data.json()
+
+// formater les données reçues au format JSON
+// .then(dataformates=>console.log(dataformates))
+
+// dans ce 'then' executer la création d'instance de Places)
+
+
 export const loader = new Loader({
   apiKey: "AIzaSyBE5oclKCY3pLzMgRnCRlwbR1v8cCK6vlg",
   version: "weekly",
@@ -130,7 +140,6 @@ let service = new google.maps.places.PlacesService(map);
             let lng = results.geometry.location.lng();
             let name = results.name;
             let adress = results.formatted_address;
-            console.log(adress)
             let place = new Places(lat, lng, name);
             place.address = adress;
             for (var i = 0; i < results.reviews.length; i++){
