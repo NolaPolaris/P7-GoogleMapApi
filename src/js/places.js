@@ -76,15 +76,24 @@ export class Places {
       
       //gestion des infos principales
       let itemName = $("<h3>" + this.placeName + "</h3>");
-      let starsNumber = this.getAverage();
+      let average = this.getAverage();
 
       //gestion du rating
       let starContainer = $("<div></div>").addClass("star-container");
       let reviewLenght = $("<span>"+this.ratings.length+" avis"+"</span>").addClass('reviewLength');
       let addReview = $("<span>"+"Ajouter un avis"+"</span>").addClass('btnAddReview');
-      let star = $("<span></span>").addClass("star").css('width', starsNumber+'rem');
-      starContainer.append(star, reviewLenght, addReview )
+  
+      
+      
+      for (let i=0; i<5; i++){
+        let star = $("<span></span>").addClass("fa fa-star");
+        starContainer.append(star);
+        if(i < average) {
+          star.addClass("checked")
+        }
+      };
 
+      starContainer.append('<span>'+average+'/5'+'</span>', reviewLenght, addReview)
 
       let itemAdress = $("<span>" + this.address + "</span>");
       let itemInfo = $('<div></div>').addClass('itemInfo');
@@ -120,10 +129,30 @@ export class Places {
        //add review : affichage form + submit
 
       let formReview = $('<form></form>').addClass('formReview');
+      let starBox = $('<div></div>').addClass('starBox');
+      
+      for (let i=0; i<5; i++){
+        let star = $('<span></span>').addClass('fa fa-star');
+        star.attr('data-id', i+1);
+        starBox.append(star);
+      };
+
+      $('.starBox > .fa').on('click', function(){
+        $(this).addClass('checked');
+        let siblings = $(this).siblings().attr('data-id');
+        let activeId = $(this).attr('data-id');
+        console.log(siblings);
+        console.log(activeId);
+
+      })    
+
+      
+      
       let textArea = $('<textarea></textarea>');
       let submit = $('<input/>').attr('type', 'submit', 'value', 'envoyer');
       listItem.append(formReview);
-      formReview.append(textArea, submit);
+      formReview.append(starBox, textArea, submit);
+    
       formReview.on( "submit", function(event) {
         event.preventDefault();
         addReview();
