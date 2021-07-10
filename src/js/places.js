@@ -138,37 +138,66 @@ export class Places {
       };
 
       $('.starBox > .fa').on('click', function(){
-        $(this).addClass('checked');
-        let siblings = $(this).siblings().attr('data-id');
-        let activeId = $(this).attr('data-id');
-        console.log(siblings);
-        console.log(activeId);
-
-      })    
-
-      
-      
+          $(this).addClass('checked');
+          let activeId = $(this).attr('data-id');
+          let siblings = $(this).siblings();
+          console.log(activeId);
+          siblings.each(function(){
+            if ($(this).attr('data-id') < activeId){
+              $(this).addClass('checked');
+            }
+          })
+      }) 
+    
       let textArea = $('<textarea></textarea>');
       let submit = $('<input/>').attr('type', 'submit', 'value', 'envoyer');
       listItem.append(formReview);
-      formReview.append(starBox, textArea, submit);
+      let overlay =  $('<div></div>').addClass('overlay');
+      let thx = $('<p>' + 'Votre restaurant a bien été ajouté !' +'</p>');
+      formReview.append(starBox, textArea, submit, overlay);
     
       formReview.on( "submit", function(event) {
         event.preventDefault();
-        addReview();
+        // créer function addReview();
+        let stars = $('checked').length;
+        if(textArea.val().trim().length < 1 && stars < 1){
+            formReview.prepend(overlay);
+            overlay.append('<p>Veuillez donner au moins une note</p>');
+            overlay.fadeIn(100);
+            overlay.addClass('min')
+            return; 
+          }
+        else if (textArea.val().trim().length < 1 && stars >= 1){
+          formReview.prepend(overlay);
+            overlay.append('<p>Etes-vous sûr de vouloir envoyer votre avis sans commentaire ?</p>')
+            overlay.fadeIn(100);
+            overlay.addClass('min');
+            return; 
+          }
+        else{
+          let formData = new Rating (stars, textArea.val())
+          formReview.addClass('min');
+          formReview.append(overlay);
+          overlay.fadeIn(100);
+          overlay.addClass('pop').append(thx);
+          overlay.on( "click", function(){
+            $(this).removeClass('pop');
+            formReview.remove();
+          });
+        }
       });
 
       // gestion affichage alterné :
       listItem.find('.btnAddReview').on('click', function(e){
         if(ratingDetails.hasClass('active')){
-          ratingDetails.slideUp(100).removeClass('active');
+          ratingDetails.slideUp(500).removeClass('active');
         }
         else if (formReview.hasClass('active')) {
-          formReview.slideUp(100).removeClass('active');
+          formReview.slideUp(500).removeClass('active');
          
         }
         else{      
-          formReview.addClass('active').slideDown(100);
+          formReview.addClass('active').slideDown(500);
         }
  
       });   

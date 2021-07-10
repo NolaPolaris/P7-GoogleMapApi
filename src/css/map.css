@@ -155,12 +155,22 @@ input[type='text']:focus, input[type='number']:focus, textarea{
 }
 
 .overlay{
-    @apply hidden h-0 w-0 absolute top-0 left-0;
+    @apply hidden h-0 w-0 absolute top-0 left-0 opacity-0 justify-center items-center w-full h-full bg-pink-500;
+    /* transform: scale3d(0,0,0) */
 }
 
 .overlay.pop{
-    @apply flex justify-center items-center w-full h-full bg-blue-400;
-    transition: 0.5s
+    @apply flex opacity-100;
+    transition: 0.5s ease-in-out;
+    /* transform: scale3d(1,1,1); */
+}
+
+.overlay.pop, .overlay.min p{
+    @apply text-center pt-3;
+}
+
+.overlay.min{
+    @apply relative my-8 h-12 opacity-100;
 }
 
 .listItem.selected{
@@ -189,12 +199,18 @@ input[type='text']:focus, input[type='number']:focus, textarea{
 
 
 .formReview{
-    @apply hidden;
+    @apply hidden relative;
 }
 
 .formReview.active{
     @apply flex flex-col;
+    transition: 0.5s;
   
+}
+
+.formReview.min{
+    @apply h-12 overflow-hidden mt-4;
+    transition: 0.5s ease-in-out;
 }
 
 .formReview.active textarea{
@@ -221,7 +237,7 @@ input[type='text']:focus, input[type='number']:focus, textarea{
     outline: none;
 }
 
-.formReview.active input[type=submit]:hover{
+.formReview.active input:hover{
     appearance: none;
     border: 2px hotpink solid;
     padding: 10px 5px;

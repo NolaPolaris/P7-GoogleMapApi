@@ -112,8 +112,6 @@ export function addMarker(place) {
     place.showDetails(); 
   });
 
-
-  
 }
 
 export function loadPlaces() {
