@@ -82,9 +82,7 @@ export class Places {
       let starContainer = $("<div></div>").addClass("star-container");
       let reviewLenght = $("<span>"+this.ratings.length+" avis"+"</span>").addClass('reviewLength');
       let addReview = $("<span>"+"Ajouter un avis"+"</span>").addClass('btnAddReview');
-  
-      
-      
+ 
       for (let i=0; i<5; i++){
         let star = $("<span></span>").addClass("fa fa-star");
         starContainer.append(star);
@@ -98,7 +96,6 @@ export class Places {
       let itemAdress = $("<span>" + this.address + "</span>");
       let itemInfo = $('<div></div>').addClass('itemInfo');
       itemInfo.append(itemName, itemAdress, starContainer );
-
 
       flexContainer.append(itemInfo, streetViewContainer);
       listItem.append(flexContainer);
@@ -141,10 +138,12 @@ export class Places {
           $(this).addClass('checked');
           let activeId = $(this).attr('data-id');
           let siblings = $(this).siblings();
-          console.log(activeId);
           siblings.each(function(){
             if ($(this).attr('data-id') < activeId){
               $(this).addClass('checked');
+            }
+            else if( ($(this).attr('data-id') > activeId) && $(this).hasClass('checked')){
+              $(this).removeClass('checked');
             }
           })
       }) 
