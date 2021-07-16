@@ -9,7 +9,10 @@
 
 </head>
 <body>
-  <h1 id="test" class="bg-teal-100 py-8 text-2xl">Rate your place !</h1>
+  <div class="flex justify-between w-full items-center">
+    <h1 class="bg-teal-100 py-8 text-2xl">Rate your place !</h1>
+    <button id="addBtn" class="btn">Ajouter votre restaurant !</button>
+  </div>
   <section class="flex">
     <div id="col-list" class="left-col w-1/4 flex-col h-full relative">
     
@@ -42,7 +45,7 @@
     <label for='adress'>Adresse</label>
     <textarea id='adress' placeholder='Adress'></textarea>
   </div>
-  <div class="btn">
+
     <input type="submit" id="submit" value="Ajouter">
-  </div>
+  
 </html>

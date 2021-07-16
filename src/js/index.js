@@ -11,6 +11,7 @@ import { Rating } from './rating';
 let placesList = [];
 
 mapApi.loader.loadCallback((e => {
+    mapApi.getUserPosition();
     mapApi.loadMap();
 
     // EXERCICE AVEC JSON DIST
@@ -46,5 +47,11 @@ $(document).ready(function () {
     fetch("places.json")
         .then(data=>data.json()
         .then(dataformates=>console.log(dataformates)))
+
+    $('#addBtn').on('click', function(){
+        console.log('ready')
+        $('#addForm').fadeIn(300);
+    })
+
 
 });

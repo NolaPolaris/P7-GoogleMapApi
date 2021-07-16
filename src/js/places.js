@@ -118,9 +118,12 @@ export class Places {
 
       listItem.find('.reviewLength').on('click', function(e){
         if(ratingDetails.hasClass('active')){
-          ratingDetails.removeClass('active').slideUp(100);
-        } else
-          listItem.find(ratingDetails).addClass('active').slideDown(100);
+          ratingDetails.removeClass('active').slideUp(300);
+        } else if (formReview.hasClass('active')){
+          formReview.removeClass('active').fadeOut(300);
+        }
+        else
+          listItem.find(ratingDetails).addClass('active').slideDown(300);
       })
 
        //add review : affichage form + submit
@@ -146,41 +149,64 @@ export class Places {
               $(this).removeClass('checked');
             }
           })
+
+          if(formReview.hasClass('repeat')){
+            formReview.removeClass('repeat')
+            formReview.remove('.alert')
+          }
       }) 
     
+      listItem.append(formReview);
+
       let textArea = $('<textarea></textarea>');
       let submit = $('<input/>').attr('type', 'submit', 'value', 'envoyer');
-      listItem.append(formReview);
-      let overlay =  $('<div></div>').addClass('overlay');
-      let thx = $('<p>' + 'Votre restaurant a bien été ajouté !' +'</p>');
-      formReview.append(starBox, textArea, submit, overlay);
+      let userName =  $('<input/>')
+        .attr({type: 'text',
+              placeholder:'Votre nom',
+              id:'userName'}
+        );
+      // let overlay =  $('<div></div>').addClass('overlay');
+      let alert = $('<p>' + 'Veuillez donner au moins une note !' +'</p>').addClass('alert'+' '+'overlay'); 
+      let thx = $('<p>' + 'Merci pour vos retours !' +'</p>').addClass('thx'+' '+'overlay');
+      formReview.append(starBox, userName, textArea, submit);
     
       formReview.on( "submit", function(event) {
         event.preventDefault();
-        // créer function addReview();
-        let stars = $('checked').length;
+        let stars = $('.starBox >.checked').length;
+        // si aucune étoiles n'est cochée, on bloque l'envoi
         if(textArea.val().trim().length < 1 && stars < 1){
-            formReview.prepend(overlay);
-            overlay.append('<p>Veuillez donner au moins une note</p>');
-            overlay.fadeIn(100);
-            overlay.addClass('min')
-            return; 
+          if (formReview.hasClass('alert')){
+            formReview.addClass('repeat');
+          }else{
+            formReview.prepend(alert);
+            alert.fadeIn(100);
+            formReview.addClass('alert')      
           }
-        else if (textArea.val().trim().length < 1 && stars >= 1){
-          formReview.prepend(overlay);
-            overlay.append('<p>Etes-vous sûr de vouloir envoyer votre avis sans commentaire ?</p>')
-            overlay.fadeIn(100);
-            overlay.addClass('min');
-            return; 
+          return; 
           }
+       
         else{
           let formData = new Rating (stars, textArea.val())
-          formReview.addClass('min');
-          formReview.append(overlay);
-          overlay.fadeIn(100);
-          overlay.addClass('pop').append(thx);
-          overlay.on( "click", function(){
-            $(this).removeClass('pop');
+          
+          if(formReview.hasClass('repeat')){
+            formReview.removeClass('repeat')
+            alert.fadeOut(200)
+          } else{
+            alert.fadeOut(10)
+            formReview
+              .removeClass('repeat')
+              .removeClass('alert')
+              .remove(alert)
+              .remove('.alert')
+              .addClass('min')
+              .prepend(thx)
+              thx.fadeIn(100)
+          }
+          
+          
+          $('.overlay').on( "click", function(){
+            $(this).removeClass('active');
+            $(this).remove(alert, thx);
             formReview.remove();
           });
         }
@@ -193,7 +219,6 @@ export class Places {
         }
         else if (formReview.hasClass('active')) {
           formReview.slideUp(500).removeClass('active');
-         
         }
         else{      
           formReview.addClass('active').slideDown(500);
