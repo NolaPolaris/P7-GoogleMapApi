@@ -82,6 +82,7 @@ export class Places {
       let starContainer = $("<div></div>").addClass("star-container");
       let reviewLenght = $("<span>"+this.ratings.length+" avis"+"</span>").addClass('reviewLength');
       let addReview = $("<span>"+"Ajouter un avis"+"</span>").addClass('btnAddReview');
+
  
       for (let i=0; i<5; i++){
         let star = $("<span></span>").addClass("fa fa-star");
