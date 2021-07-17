@@ -61,6 +61,7 @@ export function loadMap(coord) {
       place.getAverage();
       place.add();
       place.updateHTML();
+      console.log(placeName)
     }
   
     contextMenu.addClass("active");

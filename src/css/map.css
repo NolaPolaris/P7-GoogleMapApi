@@ -231,6 +231,10 @@ input[type='text'], input[type='number'], textarea{
     background: none;
 }
 
+input:disabled{
+    @apply bg-pink-100 text-pink-500;
+}
+
 .formReview textarea{
     @apply p-4 w-full mb-6;
     max-width: 100%;
