@@ -83,7 +83,7 @@ export class Places {
       let reviewLenght = $("<span>"+this.ratings.length+" avis"+"</span>").addClass('reviewLength');
       let addReview = $("<span>"+"Ajouter un avis"+"</span>").addClass('btnAddReview');
 
- 
+      //affichage de la moyenne
       for (let i=0; i<5; i++){
         let star = $("<span></span>").addClass("fa fa-star");
         starContainer.append(star);
@@ -91,19 +91,18 @@ export class Places {
           star.addClass("checked")
         }
       };
-
       starContainer.append('<span>'+average+'/5'+'</span>', reviewLenght, addReview)
 
+      //affichage des différents block :
       let itemAdress = $("<span>" + this.address + "</span>");
       let itemInfo = $('<div></div>').addClass('itemInfo');
       itemInfo.append(itemName, itemAdress, starContainer );
-
       flexContainer.append(itemInfo, streetViewContainer);
       listItem.append(flexContainer);
       $("#col-list").append(listItem);
       $("#content").append(starContainer);
       
-      //gestion des détails 
+      //gestion des détails : avis + formulaire
     
       let ratingDetails = $("<div></div>").addClass("ratingDetails");
      
@@ -159,6 +158,8 @@ export class Places {
     
       listItem.append(formReview);
 
+      //formulaire HTML
+
       let textArea = $('<textarea></textarea>');
       let submit = $('<input/>').attr('type', 'submit', 'value', 'envoyer');
       let userName =  $('<input/>')
@@ -166,7 +167,6 @@ export class Places {
               placeholder:'Votre nom',
               id:'userName'}
         );
-      // let overlay =  $('<div></div>').addClass('overlay');
       let alert = $('<p>' + 'Veuillez donner au moins une note !' +'</p>').addClass('alert'+' '+'overlay'); 
       let thx = $('<p>' + 'Merci pour vos retours !' +'</p>').addClass('thx'+' '+'overlay');
       formReview.append(starBox, userName, textArea, submit);
@@ -202,8 +202,7 @@ export class Places {
               .addClass('min')
               .prepend(thx)
               thx.fadeIn(100)
-          }
-          
+          }      
           
           $('.overlay').on( "click", function(){
             $(this).removeClass('active');
@@ -240,7 +239,7 @@ export class Places {
         $(id).addClass('selected');
       }
       $('#col_list').append('.selected');
-      $('.close').on('click', function(){
+      $('.listItem > .close').on('click', function(){
         if ($('.listItem').hasClass('selected')){
           $('.listItem').removeClass('selected');
         }

@@ -17,9 +17,40 @@
 .col-left{
     @apply h-full w-full;
 }
+
 .listItem{
     @apply p-4 m-6 border-b-2 border-blue-100;
-    box-shadow: pink 8px 0px 10px;
+    box-shadow: pink 6px 6px 0px;
+}
+
+.listItem.selected{
+    @apply block absolute top-0 left-0 w-full pt-12 m-0 shadow-none;
+    z-index: 2;
+    transition: 0.3s;
+    background: white;
+    height:185vh;
+    /* background:url('https://www.freepik.com/free-vector/white-abstract-background_11852424.html') no-repeat center;
+    background-size:cover; */
+}
+
+.listItem.selected .flexContainer{
+    /* @apply flex flex-col-reverse; */
+    @apply flex flex-col-reverse p-4 lg:m-2 xl:m-6;
+    box-shadow: pink 6px 6px 0px;
+}
+
+.listItem.selected .streetViewContainer{
+    @apply w-full h-64;
+}
+
+.listItem.selected .streetViewContainer img{
+    @apply w-full h-64;
+    border-radius: 0%;
+}
+
+.close{
+    /* @apply hidden; */
+    @apply flex absolute right-0 top-0 h-8 w-8 cursor-pointer;
 
 }
 
@@ -27,11 +58,11 @@
     @apply hidden;
 }
 
-.listItem.selected .close{
+.listItem.selected .close {
     @apply flex absolute right-0 top-0 h-8 w-8 cursor-pointer;
 }
 
-.listItem.selected .close:after{
+.close:after{
     @apply absolute h-8 w-8;
     content: '';
     left: 50%;
@@ -157,14 +188,10 @@
 }
 
 #addForm{
-    @apply absolute hidden;
+    @apply absolute hidden w-96 py-8 px-8 bg-white;
     top:50%;
     left:50%;
     transform:translate(-50%, -50%)
-}
-
-#addForm{
-    @apply py-8 px-8 bg-white;
 }
 
 button, [type='button'], [type='reset'], [type='submit'] {
@@ -216,7 +243,11 @@ input[type='text']:focus, input[type='number']:focus, textarea:focus{
 }
 
 .fieldset{
-    @apply flex mb-4;
+    @apply flex items-center justify-between mb-4;
+}
+
+.fieldset:last-of-type{
+    @apply mb-8;
 }
 
 .overlay {
@@ -226,25 +257,21 @@ input[type='text']:focus, input[type='number']:focus, textarea:focus{
     transition: 0.5s ease-in-out;
 }
 
-.listItem.selected{
-    @apply block absolute top-0 left-0 w-full bg-white pt-12 m-0 ;
-    z-index: 2;
-    transition: 0.3s;
+#addForm .overlay{
+    @apply hidden absolute top-0 left-0 h-full w-full m-0 bg-white border-solid border-2 border-pink-500;
 }
 
-.listItem.selected .flexContainer{
-    @apply flex flex-col-reverse;
+#addForm .close{
+    @apply absolute flex justify-center items-center;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    
 }
 
-.listItem.selected .streetViewContainer{
-    @apply w-full h-64;
+#addForm .close:after{
+    @apply hidden;
 }
-
-.listItem.selected .streetViewContainer img{
-    @apply w-full h-64;
-    border-radius: 0%;
-}
-
 .abstractRating{
     @apply p-8 flex flex-col items-center justify-center;
 }
@@ -269,11 +296,9 @@ input[type='text']:focus, input[type='number']:focus, textarea:focus{
 }
  
 
-.formReview input[type=submit]{
+.formReview input[type=submit], #addForm input[type=submit]{
     @apply w-1/2;
-    margin-left: 25%;
-    margin-right: 25%;
-
+    margin:0 25%;
 }
 
 .formReview.min > .starBox, .formReview.min > textarea, .formReview.min > input,.formReview > .alert, .formReview > .thx{

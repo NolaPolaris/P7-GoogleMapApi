@@ -11,12 +11,27 @@ import { Rating } from './rating';
 let placesList = [];
 
 mapApi.loader.loadCallback((e => {
-    mapApi.getUserPosition();
-    mapApi.loadMap();
+    // mapApi.getUserPosition();
+    let loadAll = (coord) => {
+        mapApi.loadMap(coord);
+        mapApi.loadPlaces(coord);
+    }
+
+    let success = (position) => {
+      let coord = {lat: position.coords.latitude, lng: position.coords.longitude}
+      loadAll(coord);
+    }
+    
+    let error = (error) => {
+      console.log('error')
+      let coord = { lat: 48.582267066445866, lng: 7.743552772565216 }
+      loadAll(coord);
+    }
+  
+    navigator.geolocation.getCurrentPosition(success, error)
 
     // EXERCICE AVEC JSON DIST
 
-    
     // $.getJSON("places.json", function (data) {
     //     $.each(data, function (index, val) {
     //         let place = new Places(val.lat, val.long, val.restaurantName);
@@ -33,25 +48,16 @@ mapApi.loader.loadCallback((e => {
     //     });
     // });
 
-    mapApi.loadPlaces();
-    
-   
-   
-    
 }));
 
 
 
 $(document).ready(function () {
-    
+
     fetch("places.json")
-        .then(data=>data.json()
-        .then(dataformates=>console.log(dataformates)))
+        .then(data => data.json()
+            .then(dataformates => console.log(dataformates)))
 
-    $('#addBtn').on('click', function(){
-        console.log('ready')
-        $('#addForm').fadeIn(300);
-    })
-
+    
 
 });

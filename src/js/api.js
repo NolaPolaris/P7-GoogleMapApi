@@ -1,4 +1,6 @@
 import $ from "jquery";
+import "regenerator-runtime/runtime";
+import "core-js/stable"; // or more selective import, like "core-js/es/array"
 import { Loader } from "@googlemaps/js-api-loader";
 import { Places } from "./places.js";
 import { Rating } from './rating';
@@ -22,26 +24,23 @@ export const loader = new Loader({
 
 loader.load();
 
-export function getUserPosition(){
-  let success = (position) => {
-    let lat = position.coords.latitude;
-    let lng = position.coords.longitude;
-    console.log(lat, lng)
+async function reverseGeocoding (lat, lng) {
+  let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lng+'&key=AIzaSyBE5oclKCY3pLzMgRnCRlwbR1v8cCK6vlg'
 
-  }
-  let error = (error) => {
-    console.error(error)
-  }
-  navigator.geolocation.getCurrentPosition(success, error);
+  const response = await fetch(url)
+  const json = await response.json();
+  let address = json['results'][0]['formatted_address'];
+  return address;
 }
-  
 
+export function loadMap(coord) {
 
-export function loadMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 48.582267066445866, lng: 7.743552772565216 },  
+    center: coord,
     zoom: 12,
   });
+
+  // à remplacer par un click simple sur le button dédié dans le headr si possible
 
   map.addListener("rightclick", (mapsMouseEvent) => {
     let contextMenu = $("#addForm"); 
@@ -51,7 +50,9 @@ export function loadMap() {
     $("#lat").attr("value", lat);
     $("#lng").attr("value", lng);
 
-  
+    // find adress by latlng
+    reverseGeocoding(lat, lng).then(address => $("#adress").val(address));
+
     function addPlace(){
       let placeName = $('#name').val();
       let placeAdress = $('#adress').val();
@@ -63,54 +64,23 @@ export function loadMap() {
     }
   
     contextMenu.addClass("active");
+    contextMenu.fadeIn();
+
     let overlay =  $('<div></div>').addClass('overlay');
     let thx = $('<p>' + 'Votre restaurant a bien été ajouté !' +'</p>');
     let close = $('<div>'+'Fermer'+'</div>').addClass('btn'+' '+'close');
-    $( "form" ).append(overlay);
-    $( "form" ).on( "submit", function(event) {
+    contextMenu.append(overlay);
+    contextMenu.on( "submit", function(event) {
       event.preventDefault();
       addPlace();
-      overlay.addClass('pop').append(thx, close);
+      overlay.fadeIn(300).append(thx, close);
       $( ".close" ).on( "click", function(){
-        overlay.removeClass('pop');
+        overlay.fadeOut(300);
         $( "form").removeClass('active');
       });
-    });
-
-    //geolocation
-    infoPosUser = new google.maps.InfoWindow();
-    const locationButton = document.createElement("button");
-    locationButton.textContent = "Pan to Current Location";
-    locationButton.classList.add("custom-map-control-button");
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-    locationButton.addEventListener("click", () => {
-      // Try HTML5 geolocation.
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
-            infoPosUser.setPosition(pos);
-            infoPosUser.setContent("Location found.");
-            infoPosUser.open(map);
-            map.setCenter(pos);
-          },
-          () => {
-            handleLocationError(true, infoPosUser, map.getCenter());
-          }
-        );
-      } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoPosUser, map.getCenter());
-      }
-    });
-    
+    });   
 
   });
-
-  
 }
 
 export function addMarker(place) {
@@ -159,10 +129,12 @@ export function addMarker(place) {
 
 }
 
-export function loadPlaces() {
-  // var centre = new google.maps.LatLng(48.866667,2.333333);
+export function loadPlaces(coord) {
+  var centre = new google.maps.LatLng(coord.lat, coord.lng);
   let request = {
     query: 'restaurants',
+    location: centre,
+    radius: '500',
     fields: ['place_id'],
   };
 
