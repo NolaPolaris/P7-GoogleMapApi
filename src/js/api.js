@@ -41,46 +41,45 @@ export function loadMap(coord) {
 
   // à remplacer par un click simple sur le button dédié dans le headr si possible
 
-  map.addListener("rightclick", (mapsMouseEvent) => {
-    let contextMenu = $("#addForm"); 
-    let position = mapsMouseEvent.latLng.toJSON();
-    let lat = position["lat"];
-    let lng = position['lng'];
-    $("#lat").attr("value", lat);
-    $("#lng").attr("value", lng);
+  // map.addListener("rightclick", (mapsMouseEvent) => {
+  //   let contextMenu = $("#addForm"); 
+  //   let position = mapsMouseEvent.latLng.toJSON();
+  //   let lat = position["lat"];
+  //   let lng = position['lng'];
+  //   $("#lat").attr("value", lat);
+  //   $("#lng").attr("value", lng);
 
-    // find adress by latlng
-    reverseGeocoding(lat, lng).then(address => $("#adress").val(address));
+  //   // find adress by latlng
+  //   reverseGeocoding(lat, lng).then(address => $("#adress").val(address));
 
-    function addPlace(){
-      let placeName = $('#name').val();
-      let placeAdress = $('#adress').val();
-      let place = new Places(lat, lng, placeName);
-      place.adress = placeAdress;
-      place.getAverage();
-      place.add();
-      place.updateHTML();
-      console.log(placeName)
-    }
+  //   function addPlace(lat, lng){
+  //     let placeName = $('#name').val();
+  //     let placeAddress = $('#adress').val();
+  //     let place = new Places(lat, lng, placeName, placeAddress);
+  //     place.getAverage();
+  //     place.add();
+  //     place.updateHTML();
+  //     console.log(placeName)
+  //   }
   
-    contextMenu.addClass("active");
-    contextMenu.fadeIn();
+  //   contextMenu.addClass("active");
+  //   contextMenu.fadeIn();
 
-    let overlay =  $('<div></div>').addClass('overlay');
-    let thx = $('<p>' + 'Votre restaurant a bien été ajouté !' +'</p>');
-    let close = $('<div>'+'Fermer'+'</div>').addClass('btn'+' '+'close');
-    contextMenu.append(overlay);
-    contextMenu.on( "submit", function(event) {
-      event.preventDefault();
-      addPlace();
-      overlay.fadeIn(300).append(thx, close);
-      $( ".close" ).on( "click", function(){
-        overlay.fadeOut(300);
-        $( "form").removeClass('active');
-      });
-    });   
+  //   let overlay =  $('<div></div>').addClass('overlay');
+  //   let thx = $('<p>' + 'Votre restaurant a bien été ajouté !' +'</p>');
+  //   let close = $('<div>'+'Fermer'+'</div>').addClass('btn'+' '+'close');
+  //   contextMenu.append(overlay);
+  //   contextMenu.on( "submit", function(event) {
+  //     event.preventDefault();
+  //     addPlace();
+  //     overlay.fadeIn(300).append(thx, close);
+  //     $( ".close" ).on( "click", function(){
+  //       overlay.fadeOut(300);
+  //       $( "form").removeClass('active');
+  //     });
+  //   });   
 
-  });
+  // });
 }
 
 
@@ -128,6 +127,7 @@ export function addMarker(place) {
   marker.addListener("click", () => {
     place.showDetails(); 
   });
+  
 
 }
 
@@ -157,8 +157,7 @@ let service = new google.maps.places.PlacesService(map);
             let lng = results.geometry.location.lng();
             let name = results.name;
             let adress = results.formatted_address;
-            let place = new Places(lat, lng, name);
-            place.address = adress;
+            let place = new Places(lat, lng, name, adress);
             for (var i = 0; i < results.reviews.length; i++){
               // console.log(results.reviews[i].text);
               let review = new Rating(results.reviews[i].rating, results.reviews[i].text);

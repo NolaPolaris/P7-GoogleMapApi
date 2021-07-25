@@ -4,7 +4,7 @@ import { Rating } from './rating.js';
 
 export class Places {
   // fetch dans le constructeur (attention au function, privilégier )
-  constructor(latitude, longitude, placeName) {
+  constructor(latitude, longitude, placeName, placeAddress) {
       //fetch url 
       // . then => après avoir récupérer les data, puis transformer en JSON, on construit à partir de ces données :
       this.placeName = placeName;
