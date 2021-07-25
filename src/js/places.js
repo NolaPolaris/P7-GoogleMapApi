@@ -92,7 +92,15 @@ export class Places {
           star.addClass("checked")
         }
       };
-      starContainer.append('<span>'+average+'/5'+'</span>', reviewLenght, addReview)
+
+      if(average <= 0 || average == undefined){
+        starContainer.append('<span>'+'Soyez le premier à donner votre avis !'+'</span>'+'<br/>', reviewLenght, addReview)
+        console.log(average)
+      }
+      else{
+        starContainer.append('<span>'+average+'/5'+'</span>', reviewLenght, addReview)
+        console.log(average)
+      }
 
       //affichage des différents block :
       let itemAdress = $("<span>" + this.address + "</span>");
