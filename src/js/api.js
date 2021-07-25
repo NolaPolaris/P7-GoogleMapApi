@@ -156,8 +156,8 @@ let service = new google.maps.places.PlacesService(map);
             let lat = results.geometry.location.lat();
             let lng = results.geometry.location.lng();
             let name = results.name;
-            let adress = results.formatted_address;
-            let place = new Places(lat, lng, name, adress);
+            let address = results.formatted_address;
+            let place = new Places(lat, lng, name, address);
             for (var i = 0; i < results.reviews.length; i++){
               // console.log(results.reviews[i].text);
               let review = new Rating(results.reviews[i].rating, results.reviews[i].text);

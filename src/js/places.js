@@ -5,12 +5,13 @@ import { Rating } from './rating.js';
 export class Places {
   // fetch dans le constructeur (attention au function, privilégier )
   constructor(latitude, longitude, placeName, placeAddress) {
-      //fetch url 
+      
+    //fetch url 
       // . then => après avoir récupérer les data, puis transformer en JSON, on construit à partir de ces données :
       this.placeName = placeName;
-      this.address = null;
+      this.address = placeAddress;
       this.ratings = [];
-      this.location = { lat: latitude, lng: longitude };
+      this.location = { lat: parseFloat(latitude), lng: parseFloat(longitude)};
       this.slug = this.slugify(this.placeName);
     };
 
