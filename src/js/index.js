@@ -58,6 +58,49 @@ $(document).ready(function () {
         .then(data => data.json()
             .then(dataformates => console.log(dataformates)))
 
-    
+            function addPlace(){
+              let placeName = $('#name').val();
+              let placeAdress = $('#adress').val();
+              let place = new Places(lat, lng, placeName);
+              place.adress = placeAdress;
+              place.getAverage();
+              place.add();
+              place.updateHTML();
+              console.log(placeName)
+            }
+          
+                
+            $('#addBtn').click(function(){
+              $("#addForm").fadeIn(300);
+            })
 
+            $("#addForm").on( "submit", function(event) {
+              event.preventDefault();
+
+              async function geocoding (adressVal) {
+                let request = 'https://maps.googleapis.com/maps/api/geocode/json?address='+adressVal+'&key=AIzaSyBE5oclKCY3pLzMgRnCRlwbR1v8cCK6vlg'
+                let url = encodeURI(request)
+                console.log(url)
+                
+                
+  
+                const response = await fetch(url)
+                const json = await response.json();
+                let location = json['results'][0].geometry.location;
+                console.log(location)
+                return location;
+              }
+
+              let lat = $("#lat");
+              let lng =  $("#lng");
+              let adressVal = $('#adress').val();
+              geocoding(adressVal).then(location => $("#lat").val(location));
+
+              addPlace();
+              overlay.fadeIn(300).append(thx, close);
+              $( ".close" ).on( "click", function(){
+                overlay.fadeOut(300);
+                $( "form").removeClass('active');
+              });
+            });   
 });

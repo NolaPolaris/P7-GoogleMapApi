@@ -26,7 +26,6 @@ loader.load();
 
 async function reverseGeocoding (lat, lng) {
   let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lng+'&key=AIzaSyBE5oclKCY3pLzMgRnCRlwbR1v8cCK6vlg'
-
   const response = await fetch(url)
   const json = await response.json();
   let address = json['results'][0]['formatted_address'];
@@ -83,6 +82,8 @@ export function loadMap(coord) {
 
   });
 }
+
+
 
 export function addMarker(place) {
   const svgMarker = {

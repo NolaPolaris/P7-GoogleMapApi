@@ -93,7 +93,10 @@
     color: hotpink;
     width: 15rem;
     margin: auto;
-        
+}
+
+#addBtn{
+    @apply mx-0;
 }
 
 .btn:hover{

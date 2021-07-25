@@ -230,7 +230,6 @@ export class Places {
     //affichage du restaurant en haut de la liste 
     showDetails(){
       let id = '#'+ this.slug;
-      let details = $('.ratingDetails');   
       if ($('.listItem').hasClass('selected')){
         $('.listItem').removeClass('selected');
         $(id).addClass('selected');
