@@ -236,6 +236,7 @@ export class Places {
       });   
     }
 
+    //localStorage 
     //affichage du restaurant en haut de la liste 
     showDetails(){
       let id = '#'+ this.slug;
