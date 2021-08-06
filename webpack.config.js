@@ -38,6 +38,18 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.svg$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              generator: (content) => svgToMiniDataURI(content.toString()),
+            },
+          },
+        ],
+      },
+      
     
     ],
   },

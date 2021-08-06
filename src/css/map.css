@@ -1,3 +1,29 @@
+/*
+    font-family: 'Paytone One', sans-serif;
+}*/
+
+h2, h3{
+    font-family: 'Cabin', sans-serif;
+}
+
+p, a, span {
+    font-family: 'Questrial', sans-serif;
+
+}
+
+h1{
+    @apply uppercase font-extrabold;
+    font-size: 5rem;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.hero, #col-list{
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+    url('https://media.istockphoto.com/vectors/food-background-vegetables-seamless-pattern-healthy-eating-tomato-vector-id1198380802?k=6&m=1198380802&s=612x612&w=0&h=clkT5JA852lNJIVveuH28IxHOcoFCcKE1aD6B2w17Ho=') repeat center;
+    /* https://png.pngtree.com/background/20210711/original/pngtree-cute-kawaii-food-doodle-pattern-picture-image_1164635.jpg */
+    /* https://media.istockphoto.com/vectors/fast-food-snacks-desserts-seamless-line-pattern-vector-id1176097155?b=1&k=6&m=1176097155&s=170667a&w=0&h=BnN8pUzciJEAaDQvK5V4waXDl2r7CtyehrcR-4YMZTA= */
+}
+
 #map{
     height: 100vh;
     width: 75%;
@@ -19,8 +45,8 @@
 }
 
 .listItem{
-    @apply p-4 m-6 border-b-2 border-blue-100;
-    box-shadow: pink 6px 6px 0px;
+    @apply p-4 m-6 border-b-2 border-grey-200 bg-white;
+    box-shadow:#dadece 1px 1px 5px 0px;
 }
 
 .listItem.selected{
@@ -84,7 +110,7 @@
 .star-container span:not(.fa) {
     @apply text-gray-500 text-xs mx-2;
 }
-.btn{
+/* .btn{
     cursor: pointer;
     appearance: none;
     border: 2px hotpink solid;
@@ -93,6 +119,19 @@
     color: hotpink;
     width: 15rem;
     margin: auto;
+} */
+
+.btn{
+    @apply uppercase relative;
+}
+
+.btn:after{
+    content: "";
+    @apply h-8 w-12 opacity-50 absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+ 
 }
 
 #addBtn{
@@ -100,11 +139,9 @@
 }
 
 .btn:hover{
+    @apply bg-yellow border-solid border-2 border-yellow;
     appearance: none;
-    border: 2px hotpink solid;
     padding: 10px 5px;
-    background: hotpink;
-    color: white;
 }
 
 .btn:focus{
@@ -124,11 +161,11 @@
 }
 
 .starBox .fa:hover{
-    color: rgb(255, 137, 196);
+    @apply text-yellow;
 }
 
 .starBox .fa:focus{
-    color: hotpink;
+    @apply text-yellow;
 }
 
 .itemInfo{
@@ -170,20 +207,18 @@
 }
 
 .ratingItems p:first-child {
-    @apply mt-4 text-sm text-yellow-500 mb-2 font-bold pr-4 ;
+    @apply mt-4 text-sm text-grey-800 mb-2 font-bold pr-4 ;
     width:15%;
 }
 
 .ratingItems:after {
-    @apply absolute;
+    @apply absolute bg-grey-200;
     top: 0.75rem;
     right: 0;
     transform: translateY(-50%);
     content: "";
     height: 1px;
-    width: 85%;
-    background: teal;
-    
+    width: 85%;    
 }
 
 .ratingItems p:nth-child(2){
@@ -199,43 +234,38 @@
 
 button, [type='button'], [type='reset'], [type='submit'] {
     -webkit-appearance: none;
+    @apply cursor-pointer bg-transparent border-grey-800 border-solid border text-grey-800;
     appearance: none;
     background: none;
     cursor: pointer;
-    border: 2px hotpink solid;
     padding: 10px 5px;
     background: transparent;
-    color: hotpink;
     width: 15rem;
     margin: auto;
     text-align: center;
 }
 
 button:hover, [type='button']:hover, [type='reset']:hover, [type='submit']:hover {
-    background: hotpink;
-    color: white;
+    @apply bg-yellow text-grey-900 border-yellow border-solid border;
     transition: 0.3s;
 
 }
 
 button:focus, [type='button']:focus, [type='reset']:focus, [type='submit']:focus {
-    background: rgb(255, 158, 207);
-    color: white;
+    background:#fdff90;
     transition: 0.3s;
 
 }
 
 input[type='text'], input[type='number'], textarea{
-    @apply mt-4;
+    @apply mt-4 border-grey-200 border border-solid bg-transparent;
     appearance: none;
-    border: 1px rgb(255, 160, 160) solid;
     padding: 5px 2px;
     outline: none;
-    background: none;
 }
 
 input:disabled{
-    @apply bg-pink-100 text-pink-500;
+    @apply bg-grey-100 text-grey-800;
 }
 
 .formReview textarea{
@@ -246,7 +276,7 @@ input:disabled{
 }
 
 input[type='text']:focus, input[type='number']:focus, textarea:focus{
-    background: rgb(255, 245, 250);
+    background: rgb(255, 255, 249);
 }
 
 .fieldset{
@@ -258,14 +288,12 @@ input[type='text']:focus, input[type='number']:focus, textarea:focus{
 }
 
 .overlay {
-    @apply relative opacity-100 py-4 text-center mt-6;
-    font-family: monospace;
-    background: hotpink;
+    @apply relative opacity-100 py-4 text-center mt-6 bg-yellow;
     transition: 0.5s ease-in-out;
 }
 
 #addForm .overlay{
-    @apply hidden absolute top-0 left-0 h-full w-full m-0 bg-white border-solid border-2 border-pink-500;
+    @apply hidden absolute top-0 left-0 h-full w-full m-0 bg-white border-solid border-2 border-yellow;
 }
 
 #addForm .close{
@@ -280,8 +308,8 @@ input[type='text']:focus, input[type='number']:focus, textarea:focus{
 }
 
 .reviewLength{
-    cursor: pointer;
-    color: hotpink;
+    @apply cursor-pointer text-grey-800;
+
 }
 .formReview{
     @apply hidden relative flex-col opacity-0;
@@ -309,14 +337,14 @@ input[type='text']:focus, input[type='number']:focus, textarea:focus{
 }
 
 .formReview.repeat > .alert{
-    background: rgb(255, 78, 137);
+    background:rgb(250, 108, 51);
     text-transform: uppercase;
     transition:ease-out 0.2s;
 }
 
 .fa{
-    color:lightgrey;
+    @apply text-grey-200;
 }
 .checked{
-    color: hotpink;
+    @apply text-yellow;
 }
