@@ -12,17 +12,27 @@ p, a, span {
 }
 
 h1{
-    @apply uppercase font-extrabold;
-    font-size: 5rem;
+    /* cute version */
+    /* @apply uppercase font-extrabold py-8 px-6 bg-yellow; */
+
+    /* ardoise version */
+    @apply uppercase font-extrabold text-grey-900 opacity-90;
+    font-size: 4.5rem;
     font-family: 'Permanent Marker', cursive;
 }
+.hero{
+    @apply px-6 py-8;
+    background:linear-gradient(rgba(252, 255, 42, 0.85), rgba(252, 255, 42, 0.85)),url('https://media.istockphoto.com/vectors/food-background-vegetables-seamless-pattern-healthy-eating-tomato-vector-id1198380802?k=6&m=1198380802&s=612x612&w=0&h=clkT5JA852lNJIVveuH28IxHOcoFCcKE1aD6B2w17Ho=') repeat center;
+}
+  
 
-.hero, #col-list{
-    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    url('https://media.istockphoto.com/vectors/food-background-vegetables-seamless-pattern-healthy-eating-tomato-vector-id1198380802?k=6&m=1198380802&s=612x612&w=0&h=clkT5JA852lNJIVveuH28IxHOcoFCcKE1aD6B2w17Ho=') repeat center;
+    /* cute version */
+   
+
     /* https://png.pngtree.com/background/20210711/original/pngtree-cute-kawaii-food-doodle-pattern-picture-image_1164635.jpg */
     /* https://media.istockphoto.com/vectors/fast-food-snacks-desserts-seamless-line-pattern-vector-id1176097155?b=1&k=6&m=1176097155&s=170667a&w=0&h=BnN8pUzciJEAaDQvK5V4waXDl2r7CtyehrcR-4YMZTA= */
-}
+    /* */
+
 
 #map{
     height: 100vh;
@@ -136,6 +146,8 @@ h1{
 
 #addBtn{
     @apply mx-0;
+    background: linear-gradient(rgba(0,0,0,0), rgba(255,255,255,0.5));
+    backdrop-filter: blur(5px);
 }
 
 .btn:hover{
@@ -229,7 +241,8 @@ h1{
     @apply absolute hidden w-96 pt-12 pb-8 px-8 bg-white;
     top:50%;
     left:50%;
-    transform:translate(-50%, -50%)
+    transform:translate(-50%, -50%);
+    backdrop-filter: blur(5px);
 }
 
 button, [type='button'], [type='reset'], [type='submit'] {
@@ -243,17 +256,20 @@ button, [type='button'], [type='reset'], [type='submit'] {
     width: 15rem;
     margin: auto;
     text-align: center;
+    backdrop-filter: blur(5px);
 }
 
 button:hover, [type='button']:hover, [type='reset']:hover, [type='submit']:hover {
     @apply bg-yellow text-grey-900 border-yellow border-solid border;
     transition: 0.3s;
+    backdrop-filter: blur(5px);
 
 }
 
 button:focus, [type='button']:focus, [type='reset']:focus, [type='submit']:focus {
     background:#fdff90;
     transition: 0.3s;
+    backdrop-filter: blur(5px);
 
 }
 
@@ -262,6 +278,7 @@ input[type='text'], input[type='number'], textarea{
     appearance: none;
     padding: 5px 2px;
     outline: none;
+    backdrop-filter: blur(5px);
 }
 
 input:disabled{
@@ -273,14 +290,17 @@ input:disabled{
     max-width: 100%;
     max-height: 360px;
     min-height: 300px;
+    backdrop-filter: blur(5px);
 }
 
 input[type='text']:focus, input[type='number']:focus, textarea:focus{
     background: rgb(255, 255, 249);
+    backdrop-filter: blur(5px);
 }
 
 .fieldset{
     @apply flex items-center justify-between mb-4;
+
 }
 
 .fieldset:last-of-type{
@@ -290,10 +310,12 @@ input[type='text']:focus, input[type='number']:focus, textarea:focus{
 .overlay {
     @apply relative opacity-100 py-4 text-center mt-6 bg-yellow;
     transition: 0.5s ease-in-out;
+    backdrop-filter: blur(5px);
 }
 
 #addForm .overlay{
     @apply hidden absolute top-0 left-0 h-full w-full m-0 bg-white border-solid border-2 border-yellow;
+    backdrop-filter: blur(5px);
 }
 
 #addForm .close{
