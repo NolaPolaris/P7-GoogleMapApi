@@ -1,9 +1,9 @@
-import $ from "jquery";
 import "regenerator-runtime/runtime";
 import "core-js/stable"; // or more selective import, like "core-js/es/array"
 import { Loader } from "@googlemaps/js-api-loader";
 import { Places } from "./places.js";
 import { Rating } from './rating';
+
 let map;
 
 //creer function pour fetch
@@ -81,8 +81,6 @@ export function loadMap(coord) {
 
   // });
 }
-
-
 
 export function addMarker(place) {
   const svgMarker = {
