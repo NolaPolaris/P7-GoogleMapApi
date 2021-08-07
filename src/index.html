@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Google Place API exercice</title>
-		<script src="bundle.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/CSSRulePlugin.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/Draggable.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/EaselPlugin.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/MotionPathPlugin.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/PixiPlugin.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/TextPlugin.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollToPlugin.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	</head>
-	<body>
-		<div class="flex justify-between w-full items-center hero">
-			<h1 class="">Rate your place !</h1>
-			<button id="addBtn" class="btn mx-6">Ajouter votre restaurant !</button>
-		</div>
-		<section class="flex">
-			<div id="col-list" class="left-col w-1/4 flex-col h-full relative"></div>
-			<div id="map"></div>
 
-		</section>
-	</body>
-	<!-- //  <script
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Google Place API exercice</title>
+	<script src="bundle.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/CSSRulePlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/Draggable.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/EaselPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/MotionPathPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/PixiPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/TextPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollToPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+	<div class="flex justify-between w-full items-center hero">
+		<h1 class="">Rate your place !</h1>
+		<button id="addBtn" class="btn mx-6">Ajouter votre restaurant !</button>
+	</div>
+	<section class="flex">
+		<div id="col-list" class="left-col w-1/4 flex-col h-full relative"></div>
+		<div id="map"></div>
+
+	</section>
+</body>
+<!-- //  <script
 	//       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5oclKCY3pLzMgRnCRlwbR1v8cCK6vlg&callback=initMap&libraries=&v=weekly"
 	//       async
 	//     ></script> -->
-	<form id="addForm">
-		<i class="close fas fa-times"></i>
-		<div class='fieldset'>
-			<label for='Nom'>Nom</label>
-			<input type='text' id='name' placeholder='Veuillez entrez un nom' required/>
-		</div>
-		<div class='hidden'>
-			<label for='lat'>Latitude</label>
-			<input type='number' id='lat' disabled="disabled" step="any"/>
-		</div>
-		<div class='hidden'>
-			<label for='lng'>Longitude</label>
-			<input type='number' id='lng' disabled="disabled" step="any"/>
-		</div>
-		<div class='fieldset'>
-			<label for='address'>Adresse</label>
-			<textarea id='address' placeholder='Address'></textarea>
-		</div>
+<form id="addForm">
+	<span class="close"></span>
+	<div class='fieldset'>
+		<label for='Nom'>Nom</label>
+		<input type='text' id='name' placeholder='Veuillez entrez un nom' required />
+	</div>
+	<div class='hidden'>
+		<label for='lat'>Latitude</label>
+		<input type='number' id='lat' disabled="disabled" step="any" />
+	</div>
+	<div class='hidden'>
+		<label for='lng'>Longitude</label>
+		<input type='number' id='lng' disabled="disabled" step="any" />
+	</div>
+	<div class='fieldset'>
+		<label for='address'>Adresse</label>
+		<textarea id='address' placeholder='Address'></textarea>
+	</div>
 
-		<input type="submit" id="submit" value="Ajouter">
+	<input type="submit" id="submit" value="Ajouter">
 
-	</html>
+</html>
+
 </html>

@@ -69,6 +69,10 @@ $(document).ready(function () {
     $("#addForm").fadeIn(300);
   })
 
+  $('.close').click(function (){
+    $("#addForm").fadeOut(300)
+  })
+
   $('#address').change(function () {
     async function geocoding(adressVal) {
       let request = 'https://maps.googleapis.com/maps/api/geocode/json?address='+adressVal+'&key=AIzaSyBE5oclKCY3pLzMgRnCRlwbR1v8cCK6vlg'
@@ -105,10 +109,10 @@ $(document).ready(function () {
     addPlace(lat, lng);
     let overlay =  $('<div></div>').addClass('overlay');
     let thx = $('<p>' + 'Votre restaurant a bien été ajouté !' +'</p>');
-    let close = $('<div>'+'Fermer'+'</div>').addClass('btn'+' '+'close');
+    let close = $('<div>'+'Fermer'+'</div>').addClass('btn');
     $("#addForm").append(overlay);
     overlay.fadeIn(300).append(thx, close);
-    $(".close").on("click", function () {
+    close.on("click", function () {
       overlay.fadeOut(300);
       $("#addForm").fadeOut(100);
     });

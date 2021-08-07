@@ -14,15 +14,16 @@ p, a, span {
 h1{
     /* cute version */
     /* @apply uppercase font-extrabold py-8 px-6 bg-yellow; */
-
-    /* ardoise version */
-    @apply uppercase font-extrabold text-grey-900 opacity-90;
+    @apply uppercase font-extrabold text-grey-900 opacity-90 px-6 py-4;
     font-size: 4.5rem;
+    background:linear-gradient(rgba(252, 255, 42, 0.85), rgba(252, 255, 42, 0.85));
     font-family: 'Permanent Marker', cursive;
 }
 .hero{
-    @apply px-6 py-8;
-    background:linear-gradient(rgba(252, 255, 42, 0.85), rgba(252, 255, 42, 0.85)),url('https://media.istockphoto.com/vectors/food-background-vegetables-seamless-pattern-healthy-eating-tomato-vector-id1198380802?k=6&m=1198380802&s=612x612&w=0&h=clkT5JA852lNJIVveuH28IxHOcoFCcKE1aD6B2w17Ho=') repeat center;
+    @apply pr-6;
+    background:url('https://media.istockphoto.com/vectors/food-background-vegetables-seamless-pattern-healthy-eating-tomato-vector-id1198380802?k=6&m=1198380802&s=612x612&w=0&h=clkT5JA852lNJIVveuH28IxHOcoFCcKE1aD6B2w17Ho=') repeat center;
+    /* background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../img/4357397.jpg) no-repeat center; */
+
 }
   
 
@@ -47,6 +48,13 @@ h1{
     height: 100vh;
     overflow-y: scroll;
     overflow-x: hidden;
+    /* background:#d3e3c6;  */
+    background:linear-gradient(rgba(210,223,209,0.95), rgba(210,223,209,0.95)), url(../img/4357397.jpg) no-repeat center;
+   
+    /* background:#d3e3c6; //dark blue */
+    /* background:#d3e3c6; */
+    /* background:#d3e3c6; */
+
 
 }
 
@@ -87,6 +95,16 @@ h1{
 .close{
     /* @apply hidden; */
     @apply flex absolute right-0 top-0 h-8 w-8 cursor-pointer;
+}
+
+.close:after{
+    content:"";
+    @apply absolute h-4 w-4;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    background:url(../img/cancel.png) no-repeat center;
+    background-size:contain;
 
 }
 
@@ -98,7 +116,7 @@ h1{
     @apply flex absolute right-0 top-0 h-8 w-8 cursor-pointer;
 }
 
-.close:after{
+/* .close:after{
     @apply absolute h-8 w-8;
     content: '';
     left: 50%;
@@ -106,7 +124,7 @@ h1{
     top: 50%;
     background: url('https://pics.freeicons.io/uploads/icons/png/3394877631553239370-512.png') no-repeat center;
     background-size: cover;
-}
+} */
 
 .listItem h3{
     @apply mb-4 text-lg font-bold uppercase;
@@ -120,41 +138,17 @@ h1{
 .star-container span:not(.fa) {
     @apply text-gray-500 text-xs mx-2;
 }
-/* .btn{
-    cursor: pointer;
-    appearance: none;
-    border: 2px hotpink solid;
-    padding: 10px 5px;
-    background: transparent;
-    color: hotpink;
-    width: 15rem;
-    margin: auto;
-} */
-
-.btn{
-    @apply uppercase relative;
-}
-
-.btn:after{
-    content: "";
-    @apply h-8 w-12 opacity-50 absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
- 
-}
 
 #addBtn{
     @apply mx-0;
-    background: linear-gradient(rgba(0,0,0,0), rgba(255,255,255,0.5));
     backdrop-filter: blur(5px);
 }
 
-.btn:hover{
-    @apply bg-yellow border-solid border-2 border-yellow;
-    appearance: none;
-    padding: 10px 5px;
+#addBtn:hover{
+    background: linear-gradient(255,255,255,0.5, rgba(255,255,255,0.5));
+    @apply border-solid border border-grey-900;
 }
+
 
 .btn:focus{
     outline: none;
@@ -174,6 +168,7 @@ h1{
 
 .starBox .fa:hover{
     @apply text-yellow;
+    text-shadow: 0px 0 1px #0d086a;
 }
 
 .starBox .fa:focus{
@@ -238,14 +233,16 @@ h1{
 }
 
 #addForm{
-    @apply absolute hidden w-96 pt-12 pb-8 px-8 bg-white;
+    @apply absolute hidden w-96 pt-12 pb-8 px-8;
     top:50%;
     left:50%;
     transform:translate(-50%, -50%);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(2px);
+    background: linear-gradient(#ffffffa3,rgba(255,255,255,0.85));
+    box-shadow: #3d3c3c3d 8px 8px 20px 0px;
 }
 
-button, [type='button'], [type='reset'], [type='submit'] {
+button, [type='button'], [type='reset'], [type='submit'], .btn {
     -webkit-appearance: none;
     @apply cursor-pointer bg-transparent border-grey-800 border-solid border text-grey-800;
     appearance: none;
@@ -259,10 +256,12 @@ button, [type='button'], [type='reset'], [type='submit'] {
     backdrop-filter: blur(5px);
 }
 
-button:hover, [type='button']:hover, [type='reset']:hover, [type='submit']:hover {
-    @apply bg-yellow text-grey-900 border-yellow border-solid border;
+button:hover, [type='button']:hover, [type='reset']:hover, [type='submit']:hover, .btn:hover {
+    @apply bg-yellow text-grey-900 border-white border-solid border;
     transition: 0.3s;
     backdrop-filter: blur(5px);
+    box-shadow:#cededc 1px 1px 3px 0px;
+
 
 }
 
@@ -311,20 +310,31 @@ input[type='text']:focus, input[type='number']:focus, textarea:focus{
     @apply relative opacity-100 py-4 text-center mt-6 bg-yellow;
     transition: 0.5s ease-in-out;
     backdrop-filter: blur(5px);
+    border-width:'30px';
+    background-color: #ffffff;
+    opacity: 1;
+    background-size: 33px 33px;
+    background-image: repeating-linear-gradient(45deg, #fafaf5 0, #fafaf5 3.3000000000000003px, #ffffff 0, #ffffff 50%);
 }
 
 #addForm .overlay{
-    @apply hidden absolute top-0 left-0 h-full w-full m-0 bg-white border-solid border-2 border-yellow;
-    backdrop-filter: blur(5px);
+    @apply hidden absolute top-0 left-0 h-full w-full m-0;
+    border-width:'30px';
+    background-color: #ffffff;
+    opacity: 1;
+    background-size: 33px 33px;
+    background-image: repeating-linear-gradient(45deg, #fafaf5 0, #fafaf5 3.3000000000000003px, #ffffff 0, #ffffff 50%);
+}
+
+#addForm .overlay p{
+    margin-top:24%;
+    margin-bottom:2rem;
 }
 
 #addForm .close{
     @apply absolute top-4 right-4;    
 }
 
-#addForm .close:after{
-    @apply hidden;
-}
 .abstractRating{
     @apply p-8 flex flex-col items-center justify-center;
 }
@@ -369,4 +379,5 @@ input[type='text']:focus, input[type='number']:focus, textarea:focus{
 }
 .checked{
     @apply text-yellow;
+    text-shadow: 0px 0 1px #0d086a;
 }
