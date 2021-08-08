@@ -11,10 +11,10 @@ import { Rating } from './rating';
 let placesList = [];
 
 mapApi.loader.loadCallback((e => {
-  // mapApi.getUserPosition();
   let loadAll = (coord) => {
     mapApi.loadMap(coord);
     mapApi.loadPlaces(coord);
+    mapApi.addUserMarker(coord);
   }
 
   let success = (position) => {
@@ -29,6 +29,8 @@ mapApi.loader.loadCallback((e => {
   }
 
   navigator.geolocation.getCurrentPosition(success, error)
+
+
 
   // EXERCICE AVEC JSON DIST
 
@@ -48,8 +50,6 @@ mapApi.loader.loadCallback((e => {
   // });
 
 }));
-
-
 
 $(document).ready(function () {
 
