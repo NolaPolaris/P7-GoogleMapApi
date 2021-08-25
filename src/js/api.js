@@ -28,15 +28,8 @@ export function loadMap(coord) {
     center: coord,
     zoom: 15,
   });
-
-  // map.addListener("center_changed", (mapsMouseEvent) => {
-  //   let position = mapsMouseEvent.latLng.toJSON();
-  //   let newCoord = { lat: position.coords.latitude, lng: position.coords.longitude }
-  //   console.log(newCoord)
-  //   console.log("center changed")
-  // })
  
-  // à remplacer par un click simple sur le button dédié dans le headr si possible
+  // Ouvre le formulaire d'ajout par un click droit sur la map:
 
   // map.addListener("rightclick", (mapsMouseEvent) => {
   //   let contextMenu = $("#addForm"); 
@@ -194,7 +187,6 @@ let service = new google.maps.places.PlacesService(map);
             let address = results.formatted_address;
             let place = new Places(lat, lng, name, address);
             for (var i = 0; i < results.reviews.length; i++){
-              // console.log(results.reviews[i].text);
               let review = new Rating(results.reviews[i].rating, results.reviews[i].text);
               review.stars = results.reviews[i].rating;
               review.comment = results.reviews[i].text;

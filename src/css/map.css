@@ -1,6 +1,10 @@
-/*
-    font-family: 'Paytone One', sans-serif;
-}*/
+
+h1{
+    @apply uppercase font-extrabold text-grey-900 opacity-90 px-6 py-4;
+    font-size: 4.5rem;
+    background:linear-gradient(rgba(252, 255, 42, 0.85), rgba(252, 255, 42, 0.85));
+    font-family: 'Permanent Marker', cursive;
+}
 
 h2, h3{
     font-family: 'Cabin', sans-serif;
@@ -11,29 +15,10 @@ p, a, span {
 
 }
 
-h1{
-    /* cute version */
-    /* @apply uppercase font-extrabold py-8 px-6 bg-yellow; */
-    @apply uppercase font-extrabold text-grey-900 opacity-90 px-6 py-4;
-    font-size: 4.5rem;
-    background:linear-gradient(rgba(252, 255, 42, 0.85), rgba(252, 255, 42, 0.85));
-    font-family: 'Permanent Marker', cursive;
-}
 .hero{
     @apply pr-6;
     background:url('https://media.istockphoto.com/vectors/food-background-vegetables-seamless-pattern-healthy-eating-tomato-vector-id1198380802?k=6&m=1198380802&s=612x612&w=0&h=clkT5JA852lNJIVveuH28IxHOcoFCcKE1aD6B2w17Ho=') repeat center;
-    /* background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../img/4357397.jpg) no-repeat center; */
-
 }
-  
-
-    /* cute version */
-   
-
-    /* https://png.pngtree.com/background/20210711/original/pngtree-cute-kawaii-food-doodle-pattern-picture-image_1164635.jpg */
-    /* https://media.istockphoto.com/vectors/fast-food-snacks-desserts-seamless-line-pattern-vector-id1176097155?b=1&k=6&m=1176097155&s=170667a&w=0&h=BnN8pUzciJEAaDQvK5V4waXDl2r7CtyehrcR-4YMZTA= */
-    /* */
-
 
 #map{
     height: 100vh;
@@ -48,14 +33,7 @@ h1{
     height: 100vh;
     overflow-y: scroll;
     overflow-x: hidden;
-    /* background:#d3e3c6;  */
     background:linear-gradient(rgba(210,223,209,0.95), rgba(210,223,209,0.95)), url(../img/4357397.jpg) no-repeat center;
-   
-    /* background:#d3e3c6; //dark blue */
-    /* background:#d3e3c6; */
-    /* background:#d3e3c6; */
-
-
 }
 
 .col-left{
@@ -73,12 +51,10 @@ h1{
     transition: 0.3s;
     background: white;
     height:185vh;
-    /* background:url('https://www.freepik.com/free-vector/white-abstract-background_11852424.html') no-repeat center;
-    background-size:cover; */
 }
 
 .listItem.selected .flexContainer{
-    /* @apply flex flex-col-reverse; */
+
     @apply flex flex-col-reverse p-4 lg:m-2 xl:m-6;
     box-shadow: pink 6px 6px 0px;
 }
@@ -93,7 +69,7 @@ h1{
 }
 
 .close{
-    /* @apply hidden; */
+
     @apply flex absolute right-0 top-0 h-8 w-8 cursor-pointer;
 }
 
@@ -115,16 +91,6 @@ h1{
 .listItem.selected .close {
     @apply flex absolute right-0 top-0 h-8 w-8 cursor-pointer;
 }
-
-/* .close:after{
-    @apply absolute h-8 w-8;
-    content: '';
-    left: 50%;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    background: url('https://pics.freeicons.io/uploads/icons/png/3394877631553239370-512.png') no-repeat center;
-    background-size: cover;
-} */
 
 .listItem h3{
     @apply mb-4 text-lg font-bold uppercase;
